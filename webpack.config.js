@@ -11,19 +11,18 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         title: 'Development',
         template: path.resolve(__dirname, 'index.html'),
-        inject: false
         })],
     target: "web",
     devServer: {
         static: {
             // publicPath: '/build',
-            directory: path.resolve(__dirname, './build'),
+            directory: path.resolve(__dirname, 'build'),
             },
         proxy: {
-            '/': 'http://localhost:3333/',
+            '/': 'http://localhost:3333',
         },
             compress: true,
-            port: 8080
+            port: 8080,
     },
     resolve: {
         extensions: ['.jsx', '.js', '.json']
