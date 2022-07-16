@@ -1,11 +1,20 @@
 import React from 'react';
+import Dashboard from './dashboard/Dashboard.jsx';
+import Header from './Header.jsx';
+import NavBar from './dashboard/navbar.jsx';
 
-function App() {
-  return (
-    <div>
-      <h1>Hi There</h1>
-    </div>
-  );
+const App = () => {
+
+    return (
+        <div className='app'>
+            < Header />
+            <div className='app-body'>
+                < NavBar />
+                < Dashboard />
+                
+            </div>
+        </div>
+    )
 }
 
 export default App;
