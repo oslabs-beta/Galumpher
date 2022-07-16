@@ -6,7 +6,7 @@ const PORT = 3333;
 
 // for the shell commands being ran
 const { exec } = require('node:child_process');
-const { stdout, stderr } = require('process');
+// const { stdout, stderr } = require('process');
 
 app.use(express.json())
 
@@ -31,7 +31,7 @@ app.use('*', (req, res) => {
   res.status(404);
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const defaultErr = {
     log: 'Error handler caught unknown middleware error',
     status: 500,
