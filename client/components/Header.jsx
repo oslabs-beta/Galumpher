@@ -3,8 +3,8 @@ import React from "react";
 const Header = () => {
 
     return (
-        <div>
-            <h2>this is the header</h2>
+        <div className="header">
+            <h2>Galumphing</h2>
         </div>
     )
 }

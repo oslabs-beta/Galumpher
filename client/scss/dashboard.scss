@@ -1,14 +1,64 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    color: rgb(227, 226, 237);
+    background-color: black;
+}
+
+#root {
+
+}
+
+.app {
+    // border: 2px solid red;
+    // height: 100%;
+    margin-left: 230px;
+}
+
+.header {
+    display: flex;
+    padding-left: 50px;
+    // position: relative;
+    // flex-direction: column;
+    background-color: rgb(55, 55, 55);
+}
+
+.app-body {
+    display: flex;
+    // height: 100%;
 }
 
 .dashboard {
-    border: 1px solid black;
-    width: 500px;
-    height: 500px;
+    // border: 2px solid black;
+    width: 100%;
+    // height: 500px;
 }
 
-h1 {
-    color: red;
+.navbar {
+    height: 100%;
+    width: 200px;
+    float: left;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(30, 30, 30);
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+  
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: blue;
+
+    box-shadow: 0px 0px 0px 20px #474747
+}
+
+a:visited {
+    color: white;
 }
