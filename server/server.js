@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
+
 app.use('*', (req, res) => {
   res.status(404);
 });
