@@ -6,8 +6,8 @@ import Swap from "./swap";
 
 const MetricsContainer = () => {
     return (
-        <div>
-            <h2>This is the Metrics Container</h2>
+        <div className="metrics-container">
+            {/* <h2>This is the Metrics Container</h2> */}
             < CPU />
             < Memory />
             < InputOutput />
