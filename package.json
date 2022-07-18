@@ -2,12 +2,14 @@
   "name": "galumphing",
   "version": "1.0.0",
   "description": "Podman Electron App",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "dev": "NODE_ENV=development concurrently \"webpack-dev-server --hot\" \"nodemon ./server/server.js\"",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "startp": "npm run build && electron ./dist/main.js",
+    "startd": "NODE_ENV=development concurrently \"electron .\" \"nodemon ./server/server.js\""
   },
   "repository": {
     "type": "git",
@@ -20,9 +22,12 @@
   },
   "homepage": "https://github.com/oslabs-beta/Galumphing#readme",
   "dependencies": {
+    "electron": "^19.0.8",
+    "electron-reload": "^2.0.0-alpha.1",
     "express": "^4.18.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "ts-loader": "^9.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -42,6 +47,7 @@
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
+    "typescript": "^4.7.4",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3"
