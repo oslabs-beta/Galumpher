@@ -6,8 +6,8 @@ const containerController = require('../controllers/containerController');
 
 
 
-router.get('/containers', containerController.getContainers, (req, res) => {
-  return res.status.json(res.locals).containers;
+router.get('/', containerController.getContainers, (req, res) => {
+  return res.status.json(res.locals.containers);
 });
 
 module.exports = router;

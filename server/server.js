@@ -5,6 +5,7 @@ const app = express();
 const PORT = 3333;
 
 // **ROUTES**
+const mainCommandsRoutes = require('./routes/mainCommandsRoutes');
 const containerRoutes = require('./routes/containerRoutes');
 
 // Parse JSON request bodys
@@ -12,6 +13,8 @@ app.use(express.json());
 
 // Always respond with the static assets
 app.use(express.static(path.resolve(__dirname, '../build')));
+
+app.use('/commands', mainCommandsRoutes);
 
 // ontainer request
 app.use('/containers', containerRoutes);

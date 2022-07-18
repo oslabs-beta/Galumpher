@@ -8,8 +8,9 @@ module.exports = {
   getContainers: (req, res, next) => {
     exec('podman ps -a --format "{{json .}}"', {windowsHide: true}, (error, stdout, stderr) => {
       if (error) next(error);
+      if (stderr) next(stderr);
       else {
-        console.log('STDOUT:', stdout, 'STDERR:', stderr);
+        console.log('executed containerController.getContainers');
         res.locals.containers = stdout;
         next();
       }
