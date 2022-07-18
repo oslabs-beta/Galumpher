@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "allowJs": true,
+      "jsx": "react",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "esModuleInterop": true,
+    }
+  }
+  

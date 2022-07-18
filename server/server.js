@@ -5,11 +5,11 @@ const app = express();
 
 const PORT = 3333;
 
-app.use(express.static(path.resolve(__dirname, '../build')));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/', (req, res) => res
   .status(200)
-  .sendFile(path.resolve(__dirname, '../build/index.html')));
+  .sendFile(path.resolve(__dirname, '../dist/index.html')));
 
 app.use('*', (req, res) => {
   res.status(404);
