@@ -5,16 +5,16 @@ import NavBar from './dashboard/navbar.jsx';
 
 const App = () => {
 
-    return (
-        <div className='app'>
-            < Header />
-            <div className='app-body'>
-                < NavBar />
-                < Dashboard />
+  return (
+    <div className='app'>
+      < Header />
+      <div className='app-body'>
+        < NavBar />
+        < Dashboard />
                 
-            </div>
-        </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 export default App;
