@@ -28,12 +28,6 @@ body {
     // height: 100%;
 }
 
-.dashboard {
-    // border: 2px solid black;
-    width: 100%;
-    // height: 500px;
-}
-
 .navbar {
     height: 100%;
     width: 200px;
@@ -47,7 +41,55 @@ body {
     padding-top: 20px;
     padding-left: 30px;
 }
-  
+
+.dashboard {
+    // border: 2px solid white;
+    width: 100%;
+    padding: 20px 20px;
+    // height: 500px;
+}
+
+.metrics-container {
+    border: 2px solid blue;
+    display: flex;
+    height: 900px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cpu {
+    text-align: center;
+    height: 200px;
+    width: 500px;
+    background-color: grey;
+    flex-direction: column;
+}
+
+.memory {
+    text-align: center;
+    height: 200px;
+    width: 500px;
+    background-color: grey;
+    flex-direction: column;
+}
+
+.input-output {
+    text-align: center;
+    height: 200px;
+    width: 500px;
+    background-color: grey;
+    flex-direction: column;
+}
+
+.swap {
+    text-align: center;
+    height: 200px;
+    width: 500px;
+    background-color: grey;
+    flex-direction: column;
+}
+
+
 a:link {
     text-decoration: none;
     color: white;

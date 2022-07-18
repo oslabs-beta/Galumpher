@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/oslabs-beta/Galumphing#readme",
   "dependencies": {
+    "chart.js": "^3.8.0",
     "eslint": "^8.19.0",
     "express": "^4.18.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
