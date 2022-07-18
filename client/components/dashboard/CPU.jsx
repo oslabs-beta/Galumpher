@@ -6,7 +6,6 @@ const CPU = () => {
   return (
     <div className="cpu">
       <h5>CPU Usage</h5>
-      <Bar data={} options={} />
     </div>
   );
 };
