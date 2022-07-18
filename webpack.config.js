@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = [
   {
-    mode: 'development',
-    entry: './src/electron.ts',
+    mode: process.env.NODE_ENV,
+    entry: './main.js',
     target: 'electron-main',
     module: {
       rules: [{
@@ -32,13 +32,14 @@ module.exports = [
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },]
     },
+    externals: ['fsevents'],
     output: {
       path: __dirname + '/dist',
-      filename: 'electron.js'
+      filename: 'main.js'
     },
   },
   {
-    mode: 'development',
+    mode: process.env.NODE_ENV,
     entry: './src/index.tsx',
     target: 'electron-renderer',
     devtool: 'source-map',
@@ -69,8 +70,9 @@ module.exports = [
     },
     output: {
       path: __dirname + '/dist',
-      filename: 'react.js'
+      filename: 'electron.js'
     },
+    externals: ['fsevents'],
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html'
