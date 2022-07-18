@@ -10,9 +10,9 @@ module.exports = {
       if (error) next(error);
       else {
         console.log('STDOUT:', stdout, 'STDERR:', stderr);
-        return res.status(200).send(stdout);
+        res.locals.containers = stdout;
+        next();
       }
     });
   },
 };
-
