@@ -5,25 +5,28 @@ const app = express();
 const PORT = 3333;
 
 // **ROUTES**
-
 const containerRoutes = require('./routes/containerRoutes');
 
+// Parse JSON request bodys
 app.use(express.json());
 
-
+// Always respond with the static assets
 app.use(express.static(path.resolve(__dirname, '../build')));
 
+// ontainer request
 app.use('/containers', containerRoutes);
 
+// Send the react app 
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'));
 });
 
-
+// Local errors
 app.use('*', (req, res) => {
   res.status(404);
 });
 
+// Global errors
 app.use((err, req, res) => {
   const defaultErr = {
     log: 'Error handler caught unknown middleware error',
