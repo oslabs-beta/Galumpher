@@ -19,7 +19,6 @@ module.exports = {
         return next();
       }
     });
-
   },
 
   stop: (req, res, next) => {

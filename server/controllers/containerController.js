@@ -35,7 +35,7 @@ module.exports = {
       else {
         console.log('executed contaienerController.getStats');
         const metrics = JSON.parse(stdout);
-        res.locals.metrics = metrics;
+        res.locals.metrics = metrics[0];
         next();
       }
     });
