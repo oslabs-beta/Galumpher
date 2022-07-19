@@ -9,7 +9,8 @@
     "dev": "NODE_ENV=development concurrently \"webpack-dev-server --hot\" \"nodemon ./server/server.js\"",
     "build": "NODE_ENV=production webpack",
     "startp": "npm run build && electron ./dist/main.js",
-    "startd": "NODE_ENV=development concurrently \"electron .\" \"nodemon ./server/server.js\""
+    "startd": "NODE_ENV=development concurrently \"electron .\" \"nodemon ./server/server.js\"",
+    "begin": "electron ."
   },
   "repository": {
     "type": "git",
