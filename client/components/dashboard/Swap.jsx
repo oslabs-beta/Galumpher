@@ -1,9 +1,12 @@
 import React from "react";
+import { Bar } from 'react-chartjs-2';
+import {Chart as ChartJS} from 'chart.js/auto';
 
-const Swap = () => {
+const Swap = ({chartData}) => {
   return (
     <div className='swap'>
-      <h5>This is the swap graph</h5>
+      <h5>Swap graph</h5>
+      < Bar data={chartData}/>
     </div>
   );
 };

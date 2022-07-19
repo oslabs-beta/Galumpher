@@ -50,7 +50,7 @@ body {
 }
 
 .metrics-container {
-    border: 2px solid blue;
+    // border: 2px solid blue;
     display: flex;
     height: 900px;
     flex-wrap: wrap;
@@ -59,34 +59,28 @@ body {
 
 .cpu {
     text-align: center;
-    height: 200px;
-    width: 500px;
-    background-color: grey;
-    flex-direction: column;
+    height: 400px;
+    width: 600px;
+    // background-color: grey;
+    // flex-direction: column;
 }
 
 .memory {
     text-align: center;
-    height: 200px;
-    width: 500px;
-    background-color: grey;
-    flex-direction: column;
+    height: 400px;
+    width: 600px;
 }
 
 .input-output {
     text-align: center;
-    height: 200px;
-    width: 500px;
-    background-color: grey;
-    flex-direction: column;
+    height: 300px;
+    width: 400px;
 }
 
 .swap {
     text-align: center;
-    height: 200px;
-    width: 500px;
-    background-color: grey;
-    flex-direction: column;
+    height: 400px;
+    width: 600px;
 }
 
 
@@ -97,7 +91,6 @@ a:link {
 
 a:hover {
     color: blue;
-
     box-shadow: 0px 0px 0px 20px #474747
 }
 
