@@ -1,31 +1,39 @@
 // for the shell commands being ran
 const { exec } = require('node:child_process');
-const { stderr } = require('node:process');
-// const { stdout } = require('node:process');
-// const { stdout, stderr } = require('process');
+// Error object for exec command methods
+const { createError } = require('../serverExecErrs');
+
 
 module.exports = {
   start: (req, res, next) => {
-    exec('podman machine start', {windowsHide: true}, (error, stdout) => {
-      if (error) next(error);
-      if (stderr) next(stderr)
+    exec('podman machine start', {windowsHide: true}, (error, stdout, stderr) => {
+      if (error) {
+        // console.log(error);
+      }
+      if (stderr) {
+        return  next(createError(stderr, 'mainCommandController.start'));
+      }
       else {
         console.log('executed mainCommandsController.start');
-        res.locals.out = stdout;
-        next();
+        res.locals.start = stdout;
+        return next();
       }
     });
 
   },
 
   stop: (req, res, next) => {
-    exec('podman machine stop --format "{{json .}}"', {windowsHide: true}, (error, stdout) => {
-      if (error) next(error);
-      if (stderr) next(stderr);
+    exec('podman machine stop', {windowsHide: true}, (error, stdout, stderr) => {
+      // if (error) {
+      //   console.log(error);
+      // } 
+      if (stderr) {
+        return next(createError(stderr, 'mainCommandController.stop'));
+      } 
       else {
         console.log('executed mainCommandsController.stop');
         res.locals.stop = stdout;
-        next();
+        return next();
       }
     });
   }

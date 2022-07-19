@@ -4,7 +4,6 @@ const router = express.Router();
 const containerController = require('../controllers/containerController');
 
 
-
 router.get('/stats' , containerController.getStats, (req, res) => {
   return res.status(200).json(res.locals.metrics);
 });
