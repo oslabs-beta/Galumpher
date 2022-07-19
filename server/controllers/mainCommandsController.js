@@ -6,7 +6,7 @@ const { createError } = require('../serverExecErrs');
 
 module.exports = {
   start: (req, res, next) => {
-    exec('podman machine start', {windowsHide: true}, (error, stdout, stderr) => {
+    exec('podman machine start', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   stop: (req, res, next) => {
-    exec('podman machine stop', {windowsHide: true}, (error, stdout, stderr) => {
+    exec('podman machine stop', { windowsHide: true }, (error, stdout, stderr) => {
       // if (error) {
       //   console.log(error);
       // } 

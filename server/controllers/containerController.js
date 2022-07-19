@@ -8,7 +8,7 @@ const { createError } = require('../serverExecErrs');
 module.exports = {
 
   getContainers: (req, res, next) => {
-    exec('podman ps -a --format "{{json .}}"', {windowsHide: true}, (error, stdout, stderr) => {
+    exec('podman ps -a --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   getStats: (req, res, next) => {
-    exec('podman stats --no-stream --format "{{json .}}"', {windowsHide: true}, (error, stdout, stderr) => {
+    exec('podman stats --no-stream --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
