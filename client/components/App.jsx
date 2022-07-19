@@ -11,7 +11,6 @@ const App = () => {
       <div className='app-body'>
         < NavBar />
         < Dashboard />
-                
       </div>
     </div>
   );
