@@ -1,21 +1,21 @@
-const { Pool, Client } = require('pg')
+const { Pool, Client } = require('pg');
 
 // post our PG_URI here
 
-const PG_URI = 'postgres://uibmekip:VsaStnM05jRflUthJRed4PMeXJbUiZpz@heffalump.db.elephantsql.com/uibmekip'
+const PG_URI = 'postgres://uibmekip:VsaStnM05jRflUthJRed4PMeXJbUiZpz@heffalump.db.elephantsql.com/uibmekip';
 
 
 const pool = new Pool({
-    connectionString: PG_URI
-  });
+  connectionString: PG_URI
+});
 
 
-  module.exports = {
-    query: (text, params, callback) => {
-      console.log('executed query', text);
-      return pool.query(text, params, callback);
-    }
-  };
+module.exports = {
+  query: (text, params, callback) => {
+    console.log('executed query', text);
+    return pool.query(text, params, callback);
+  }
+};
 
 
 
@@ -28,7 +28,7 @@ const pool = new Pool({
 
   
 
-  // const {Client} = require('pg')
+// const {Client} = require('pg')
 // const client = new Client({
 //     host: "localhost",
 //     user: "postgres",
