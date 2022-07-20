@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS metrics (
     net_in_out NUMBER,
     pid INTEGER,
     CPU_time NUMBER
-    created_at TIMESTAMPTZ 
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
-DEFAULT CURRENT_TIMESTAMP

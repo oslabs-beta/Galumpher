@@ -7,6 +7,8 @@ const PORT = 3333;
 // **ROUTES**
 const containerRoutes = require('./routes/containerRoutes');
 
+const dbRoutes = require('./routes/dbRoutes');
+
 // Parse JSON request bodys
 app.use(express.json());
 
@@ -15,6 +17,9 @@ app.use(express.static(path.resolve(__dirname, '../build')));
 
 // ontainer request
 app.use('/containers', containerRoutes);
+
+// Database request
+app.use('/db', dbRoutes);
 
 // Send the react app 
 app.get('/', (req, res) => {
