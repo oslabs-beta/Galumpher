@@ -12,11 +12,13 @@ body {
 .app {
     // border: 2px solid red;
     // height: 100%;
-    margin-left: 230px;
+    margin-left: 180px;
 }
 
 .header {
     display: flex;
+    padding-top: 10px;
+    padding-bottom: 5px;
     padding-left: 50px;
     // position: relative;
     // flex-direction: column;
@@ -28,9 +30,11 @@ body {
     // height: 100%;
 }
 
+////// NavBar //////
+
 .navbar {
     height: 100%;
-    width: 200px;
+    width: 180px;
     float: left;
     position: fixed;
     z-index: 1;
@@ -38,9 +42,43 @@ body {
     left: 0;
     background-color: rgb(30, 30, 30);
     overflow-x: hidden;
-    padding-top: 20px;
-    padding-left: 30px;
+    text-align: center;
+    // padding-left: 30px;
 }
+
+.icon {
+    width: 60%;
+    margin-top: 0;
+    // padding-top: 5px;
+    // padding-bottom: 5px;
+}
+
+.menu {
+    text-align: center;
+    background-color: rgb(54, 54, 54);
+    margin-top: 0;
+    padding-top: 41px;
+    padding-bottom: 20px;
+}
+
+.containers-btn {
+    width: 180px;
+    background-color: rgb(30, 30, 30);
+    border: none;
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.containers-btn:hover {
+    background-color: rgb(90, 90, 90);
+    cursor: pointer;
+}
+
+////// Dashboard /////
 
 .dashboard {
     // border: 2px solid white;
@@ -51,11 +89,34 @@ body {
 
 .metrics-container {
     // border: 2px solid blue;
+    padding-top: 90px;
     display: flex;
     height: 900px;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.update-metrics {
+    position: absolute;
+    right: 60px;
+    top: 110px;
+    background-color: rgba(75,192,192,1);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 2px;
+}
+
+.update-metrics:hover {
+    opacity: .9;
+    cursor: pointer;
+}
+
+///// Graphs /////
 
 .cpu {
     text-align: center;
@@ -81,19 +142,4 @@ body {
     text-align: center;
     height: 400px;
     width: 600px;
-}
-
-
-a:link {
-    text-decoration: none;
-    color: white;
-}
-
-a:hover {
-    color: blue;
-    box-shadow: 0px 0px 0px 20px #474747
-}
-
-a:visited {
-    color: white;
 }

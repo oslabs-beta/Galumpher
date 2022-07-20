@@ -134,10 +134,10 @@ useEffect(() => {
   return (
     <div className="metrics-container">
       {/* <h2>This is the Metrics Container</h2> */}
+      <button className="update-metrics">Update Metrics</button>
       < CPU chartData={userCpu}/>
       < Memory chartData={userMemory}/>
       < InputOutput chartData={userIO}/>
-      {/* < Swap chartData={userSwap}/> */}
     </div>
   );
 };
