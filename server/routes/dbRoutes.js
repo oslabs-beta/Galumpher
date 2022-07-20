@@ -5,7 +5,7 @@ const router = express.Router();
 const dbController = require('../controllers/dbController.js');
 
 router.post('/insertData', dbController.insertData, (req, res) => {
-  return res.status(200).json('insertData works');
+  return res.status(200).json('Data successfully inserted');
 });
 
 router.post('/', dbController.createTable, (req, res) => {
@@ -14,7 +14,7 @@ router.post('/', dbController.createTable, (req, res) => {
 
 
 router.get('/', dbController.getData, (req, res) => {
-  return res.status(200).json('getData works');
+  return res.status(200).json(res.locals.data);
 });
 
 
