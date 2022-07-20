@@ -23,6 +23,7 @@ const MetricsContainer = () => {
   //wrap with the use effect hook to be on load
   //declare state up here
 const [dataList,setDataList] = useState({ dataPoints:[] })
+
 useEffect(() => {
   const fetch = async () => {
     const results = await axios(
