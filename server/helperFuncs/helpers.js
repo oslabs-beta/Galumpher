@@ -1,8 +1,8 @@
 const convertToMb = (stringBytes) => {
-
-  if (stringBytes.slice(-2) === 'kB') return parseFloat((stringBytes.slice(0, -2) / 1024).toFixed(3));
+  if (stringBytes.slice(-2) === 'kB') return parseFloat((stringBytes.slice(0, -2) / 1024).toFixed(4));
   if (stringBytes.slice(-2) === 'MB') return parseFloat(stringBytes.slice(0, -2));
-  if (stringBytes.slice(-2) === 'GB') return parseFloat((stringBytes.slice(0, -2) * 1024).toFixed(3));
+  if (stringBytes.slice(-2) === 'GB') return parseFloat((stringBytes.slice(0, -2) * 1024).toFixed(4));
+  else return parseFloat((stringBytes.slice(0, -1) / 1048476).toFixed(4));
 };
 
 const trimAndSplit = (metrics, indx) => {
@@ -13,6 +13,8 @@ module.exports = {
   parseStats: (containerStats) => {
     const parsedStats = {};
     for (let i = 0; i < containerStats.length; i ++) {
+      parsedStats.container_name = containerStats[i].name;
+      parsedStats.container_id = containerStats[i].id;
       parsedStats.cpu_percent = parseFloat(containerStats[i].cpu_percent.replace(/([%])+/g, ''));
       parsedStats.avg_cpu = parseFloat(containerStats[i].avg_cpu.replace(/([%])+/g, ''));
       parsedStats.mem_usage = convertToMb(trimAndSplit(containerStats[i].mem_usage, 0));
@@ -26,7 +28,4 @@ module.exports = {
     }
     return parsedStats;
   }
-
 };
-
-

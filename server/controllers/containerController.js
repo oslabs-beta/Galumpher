@@ -38,7 +38,6 @@ module.exports = {
         console.log('executed contaienerController.getStats');
         const  metrics = parseStats(JSON.parse(stdout));
         res.locals.metrics = metrics;
-        console.log(res.locals.metrics);
         next();
       }
     });
