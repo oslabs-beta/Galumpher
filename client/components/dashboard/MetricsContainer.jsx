@@ -22,23 +22,43 @@ const dataArr = [];
 const MetricsContainer = () => {
   //wrap with the use effect hook to be on load
   //declare state up here
-const [dataList,setDataList] = useState({ dataPoints:[] })
+// const [dataList,setDataList] = useState({ dataPoints:[] })
+
+
 
 useEffect(() => {
   const fetch = async () => {
     const results = await axios(
       '/container/stats'
     )
-    setDataList(results.dataList)
-  }
-})
+    // declare created_at array and reassign to all labels properties
+
+    // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
+    // const cpu = [.04, .06]
+    // const memory = [51.45, 51.00]
+    // const userIO = [0.001, 0.002]
+
+    // call each set state callback to update labels array and datasets.data array in relevent graphs
+    setUserCpu(results.dataList)
   
+  }
+}, [])
+
+    // fetch get request to server will return an array of objects
+    // loop through incoming array of objects
+    // push values of created_at into labels array
+    // push values of each property into datasets.data array
+
+  // should initialize labels and datasets.data to empty arrays
+
   const [userCpu,setUserCpu] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    // created_at values
+    labels: [],
     datasets: [{
       label: 'CPU Percentage',
       // data = y-axis
-      data: dummyData.map((data) => data.cpu_percent),
+      // cpu_percent values
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
       backgroundColor: [  
         '#f0ecf6',
@@ -59,11 +79,11 @@ useEffect(() => {
 
   //Memory graph and state
   const [userMemory,setUserMemory] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    labels: [],
     datasets: [{
       label: 'Memory Percentage',
       // data = y-axis
-      data: dummyData.map((data) => data.mem_percent),
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
       //we need to add 10 colors here 
       backgroundColor: [  
@@ -84,11 +104,11 @@ useEffect(() => {
   });
   //InputOutput graph and state
   const [userIO,setUserIO] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    labels: [],
     datasets: [{
       label: 'Net Input Output',
       // data = y-axis
-      data: dummyData.map((data) => data.net_io),
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
       backgroundColor: [  
         '#f0ecf6',
@@ -108,11 +128,11 @@ useEffect(() => {
   });
   //Swap graph and state
   const [userSwap,setUserSwap] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    labels: [],
     datasets: [{
       label: 'Container Swap',
       // data = y-axis
-      data: dummyData.map((data) => data.swap),
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
     
       backgroundColor: [  
@@ -133,6 +153,56 @@ useEffect(() => {
   });
 
 
+  /*
+    [
+        {
+            container_name: 'first container',
+            container_id: '57',
+            cpu_percent: 0.04,
+            avg_cpu: 0.04,
+            mem_usage: 51.45,
+            mem_Limit: 2114.56,
+            mem_percent: 2.49,
+            net_input: 0.001,
+            net_output: 0.003,
+            block_input: 59.45,
+            block_output: 0.008,
+            pids: 35,
+            created_at: 2022-07-19 16:02:51 +0000
+        },
+        {
+            container_name: 'first container',
+            container_id: '57',
+
+            cpu_percent: 0.04,
+            avg_cpu: 0.04, // how much on average you're using (%)
+
+            mem_usage: 51.00, // amount mem MB
+            mem_Limit: 2114.56, // MB
+            mem_percent: 2.49, // mem usage compared to mem limit
+
+            net_input: 0.002,
+            net_output: 0.003,
+
+            block_input: 59.45,
+            block_output: 0.008,
+            
+            pids: 35,
+            created_at: 2022-07-19 18:02:51 +0000
+        }
+    ] 
+*/
+
+   // declare created_at array and reassign to all labels properties
+
+    // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
+    // const cpu = [.04, .06]
+    // const memory = [51.45, 51.00]
+    // const userIO = [0.001, 0.002]
+
+    // call each set state callback to update labels array and datasets.data array in relevent graphs
+
+
   // fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
     fetch('/containers/stats', {
@@ -145,11 +215,47 @@ useEffect(() => {
       })
       .then(data => {
         //loop through data and replace each object in containderData array with incoming objects
-        for (let i = 0; i < data.length; i++) {
-          containerData[i] = data[i];
-          // need to trigger state change as well or move the array of objects into the initial state
+        const createdAt = [];
+
+        const cpuPercent = [];
+        const memory = [];
+        const userIO = [];
+
+        for (const obj of data) {
+          for (const key in obj) {
+            if (key === 'created_at') {
+                createdAt.push(obj[key])
+            }
+            if (key === 'cpu_percent') {
+                cpuPercent.push(obj[key])
+            }
+            if (key === 'mem_percent') {
+                memory.push(obj[key])
+            }
+          }
         }
+
+        setUserCpu({
+            labels: createdAt,
+            datasets: [{
+                data: cpuPercent
+            }]
+        });
+
+        setUserMemory({
+            labels: createdAt,
+            datasets: [{
+                data: memory,
+            }]
+        });
+        setUserIO({
+            labels: createdAt,
+            datasets: [{
+                data: userIO,
+            }]
+        });
       })
+
       .catch((error) => {
         console.error('Error: ', error);
       });
