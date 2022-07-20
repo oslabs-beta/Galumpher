@@ -2,7 +2,9 @@
 const { exec } = require('node:child_process');
 
 // Error object for exec command methods
-const { createError } = require('../serverExecErrs');
+const { createError } = require('../errorObjs/serverExecErrs');
+// Parser for the stats metrics
+const { parseStats } = require('../helperFuncs/helpers');
 
 
 module.exports = {
@@ -34,8 +36,9 @@ module.exports = {
       } 
       else {
         console.log('executed contaienerController.getStats');
-        const metrics = JSON.parse(stdout);
-        res.locals.metrics = metrics[0];
+        const  metrics = parseStats(JSON.parse(stdout));
+        res.locals.metrics = metrics;
+        console.log(res.locals.metrics);
         next();
       }
     });

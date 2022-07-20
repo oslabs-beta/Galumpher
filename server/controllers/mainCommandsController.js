@@ -1,7 +1,7 @@
 // for the shell commands being ran
 const { exec } = require('node:child_process');
 // Error object for exec command methods
-const { createError } = require('../serverExecErrs');
+const { createError } = require('../errorObjs/serverExecErrs');
 
 
 module.exports = {

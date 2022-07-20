@@ -5,7 +5,6 @@ const containerController = require('../controllers/containerController');
 
 
 router.get('/stats' , containerController.getStats, (req, res) => {
-  console.log(res.locals.metrics);
   return res.status(200).json(res.locals.metrics);
 });
 
