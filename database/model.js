@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 const { Pool, Client } = require('pg');
 
 // post our PG_URI here
 
 const PG_URI = 'postgres://uibmekip:VsaStnM05jRflUthJRed4PMeXJbUiZpz@heffalump.db.elephantsql.com/uibmekip';
+=======
+const { Pool } = require('pg');
+
+// post our PG_URI here
+
+const PG_URI = 'postgres://gzsnrmcg:O6wPSpUSQcHLA6L0yTEsuZRjcJnOCi3A@kashin.db.elephantsql.com/gzsnrmcg';
+>>>>>>> dev
 
 
 const pool = new Pool({
@@ -15,6 +23,7 @@ module.exports = {
     console.log('executed query', text);
     return pool.query(text, params, callback);
   }
+<<<<<<< HEAD
 };
 
 
@@ -47,3 +56,6 @@ module.exports = {
 //     }
 //     client.end;
 // })
+=======
+};
+>>>>>>> dev
