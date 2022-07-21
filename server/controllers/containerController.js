@@ -27,7 +27,7 @@ module.exports = {
   },
 
   getStats: (req, res, next) => {
-    console.log('here')
+    console.log('here');
     exec('podman stats --no-stream --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
