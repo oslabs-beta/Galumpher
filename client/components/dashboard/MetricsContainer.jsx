@@ -188,42 +188,95 @@ const MetricsContainer = () => {
 
 
 
-  // useEffect(() => {
-  //   axios.get('/container/stats')
-  //     .then( res => {
-  //       const createArr = [];
-  //       const cpuArr = [];
-  //       const memArr = [];
-  //       const ioArr = [];
-  //       for (let i = 0; i < res.length; i++) {
-  //         createArr.push(res[i].created_at);
-  //         cpuArr.push(res[i].cpu_percent);
-  //         memArr.push(res[i].mem_percent);
-  //         ioArr.push(res[i].net_io);
-  //       }
-  //       setUserCpu({
-  //         labels:createArr, 
-  //         datasets:[{
-  //           data:cpuArr
-  //         }]
-  //       });
-  //       setUserMemory({
-  //         labels:createArr, 
-  //         datasets:[{
-  //           data:memArr
-  //         }]
-  //       });
-  //       setUserIO({
-  //         labels:createArr, 
-  //         datasets:[{
-  //           data:ioArr
-  //         }]
-  //       });
-  //     });
-  // },[]);
+  useEffect(() => {
+    fetch('/containers/stats', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then( res => {
+        console.log(res);
+        const createArr = [];
+        const cpuArr = [];
+        const memArr = [];
+        const ioArr = [];
+        for (let i = 0; i < res.length; i++) {
+          console.log('entered loop');
+          createArr.push(res[i].created_at);
+          cpuArr.push(res[i].cpu_perc);
+          memArr.push(res[i].memory_perc);
+          ioArr.push(res[i].net_input);
+        }
+        console.log(createArr);
+        console.log(cpuArr);
+        console.log(memArr);
+        console.log(ioArr);
+        setUserCpu({
+          labels:createArr,
+          datasets:[{
+            label: 'CPU Percentage',
+            data:cpuArr,
+            backgroundColor: [
+              '#f0ecf6',
+              '#e1d9ec',
+              '#d3c5e3',
+              '#c4b2d9',
+              '#b59fd0',
+              '#a68cc6',
+              '#9779bd',
+              '#8965b3',
+              '#7a52aa',
+              '#6b3fa0'
+            ],
+            borderColor: 'grey',
+            borderWidth: 2
+          }]
+        });
+        setUserMemory({
+          labels:createArr,
+          datasets:[{
+            label: 'Memory Percentage',
+            data:memArr,
+            backgroundColor: [
+              '#f0ecf6',
+              '#e1d9ec',
+              '#d3c5e3',
+              '#c4b2d9',
+              '#b59fd0',
+              '#a68cc6',
+              '#9779bd',
+              '#8965b3',
+              '#7a52aa',
+              '#6b3fa0'
+            ],
+            borderColor: 'grey',
+            borderWidth: 2
+          }]
+        });
+        setUserIO({
+          labels:createArr,
+          datasets:[{
+            label: 'Net Input',
+            data:ioArr,
+            backgroundColor: [
+              '#f0ecf6',
+              '#e1d9ec',
+              '#d3c5e3',
+              '#c4b2d9',
+              '#b59fd0',
+              '#a68cc6',
+              '#9779bd',
+              '#8965b3',
+              '#7a52aa',
+              '#6b3fa0'
+            ],
+            borderColor: 'grey',
+            borderWidth: 2
+          }]
+        });
+    
+      },[]);
+  });
   
-
-
 
   // fetch get request to server will return an array of objects
   // loop through incoming array of objects
