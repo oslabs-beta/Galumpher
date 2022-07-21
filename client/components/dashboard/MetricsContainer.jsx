@@ -6,7 +6,7 @@ import CPU from './cpu';
 import Memory from './memory';
 import InputOutput from './InputOutput';
 // import Swap from './swap';
-import { dummyData } from './data';
+// import { dummyData } from './data';
 
 //make fetch request in here here to server 
 //receiving a JSON from the server
@@ -33,42 +33,194 @@ import { dummyData } from './data';
 //   created_at: 2022-07-19 16:02:51 +0000
 // }
 
+
+
 const MetricsContainer = () => {
   //wrap with the use effect hook to be on load
   //declare state up here
-  useEffect(() => {
-    axios.get('/container/stats')
-      .then( res => {
-        const createArr = [];
-        const cpuArr = [];
-        const memArr = [];
-        const ioArr = [];
-        for (let i = 0; i < res.length; i++) {
-          createArr.push(res[i].created_at);
-          cpuArr.push(res[i].cpu_percent);
-          memArr.push(res[i].mem_percent);
-          ioArr.push(res[i].net_io);
-        }
-        setUserCpu({
-          labels:createArr, 
-          datasets:[{
-            data:cpuArr
-          }]
-        });
-        setUserMemory({
-          labels:createArr, 
-          datasets:[{
-            data:memArr
-          }]
-        });
-        setUserIO({
-          labels:createArr, 
-          datasets:[{
-            data:ioArr
-          }]
-        });
-      });
-  },[]);
+
+  const res = [
+    {
+      'id': 9,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '0.88',
+      'avg_cpu_perc': '0.88',
+      'mem_usage': '51.03',
+      'mem_limit': '2114.56',
+      'memory_perc': '2.47',
+      'net_input': '0.0008',
+      'net_output': '0.0018',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T02:25:37.115Z'
+    },
+    {
+      'id': 8,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '0.33',
+      'avg_cpu_perc': '0.33',
+      'mem_usage': '50.75',
+      'mem_limit': '2114.56',
+      'memory_perc': '2.46',
+      'net_input': '0.0009',
+      'net_output': '0.002',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T02:02:41.010Z'
+    },
+    {
+      'id': 7,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '0.37',
+      'avg_cpu_perc': '0.37',
+      'mem_usage': '50.75',
+      'mem_limit': '2114.56',
+      'memory_perc': '2.46',
+      'net_input': '0.0009',
+      'net_output': '0.002',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T02:01:52.319Z'
+    },
+    {
+      'id': 6,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '0.45',
+      'avg_cpu_perc': '0.45',
+      'mem_usage': '50.74',
+      'mem_limit': '2114.56',
+      'memory_perc': '2.46',
+      'net_input': '0.0009',
+      'net_output': '0.002',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T02:00:36.114Z'
+    },
+    {
+      'id': 5,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '0.76',
+      'avg_cpu_perc': '0.76',
+      'mem_usage': '50.73',
+      'mem_limit': '2114.56',
+      'memory_perc': '2.46',
+      'net_input': '0.0008',
+      'net_output': '0.0018',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T01:58:12.755Z'
+    },
+    {
+      'id': 4,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '1.05',
+      'avg_cpu_perc': '1.05',
+      'mem_usage': '50.72',
+      'mem_limit': '2114.56',
+      'memory_perc': '2.46',
+      'net_input': '0.0008',
+      'net_output': '0.0018',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T01:57:16.253Z'
+    },
+    {
+      'id': 3,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '1.77',
+      'avg_cpu_perc': '1.77',
+      'mem_usage': '50.72',
+      'mem_limit': '3.64',
+      'memory_perc': '2.46',
+      'net_input': '0.0008',
+      'net_output': '0.0017',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T01:56:16.258Z'
+    },
+    {
+      'id': 2,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '3.83',
+      'avg_cpu_perc': '3.83',
+      'mem_usage': '50.72',
+      'mem_limit': '3.64',
+      'memory_perc': '2.46',
+      'net_input': '0.0007',
+      'net_output': '0.0015',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T01:55:28.853Z'
+    },
+    {
+      'id': 1,
+      'container_name': 'practical_sanderson',
+      'container_id': 'a0b0f0dfc386',
+      'cpu_perc': '4.94',
+      'avg_cpu_perc': '4.94',
+      'mem_usage': '50.72',
+      'mem_limit': '3.64',
+      'memory_perc': '2.46',
+      'net_input': '0.0007',
+      'net_output': '0.0015',
+      'block_input': '57.95',
+      'block_output': '0.008',
+      'pid': 31,
+      'created_at': '2022-07-21T01:55:20.193Z'
+    }
+  ];
+
+
+
+  // useEffect(() => {
+  //   axios.get('/container/stats')
+  //     .then( res => {
+  //       const createArr = [];
+  //       const cpuArr = [];
+  //       const memArr = [];
+  //       const ioArr = [];
+  //       for (let i = 0; i < res.length; i++) {
+  //         createArr.push(res[i].created_at);
+  //         cpuArr.push(res[i].cpu_percent);
+  //         memArr.push(res[i].mem_percent);
+  //         ioArr.push(res[i].net_io);
+  //       }
+  //       setUserCpu({
+  //         labels:createArr, 
+  //         datasets:[{
+  //           data:cpuArr
+  //         }]
+  //       });
+  //       setUserMemory({
+  //         labels:createArr, 
+  //         datasets:[{
+  //           data:memArr
+  //         }]
+  //       });
+  //       setUserIO({
+  //         labels:createArr, 
+  //         datasets:[{
+  //           data:ioArr
+  //         }]
+  //       });
+  //     });
+  // },[]);
   
 
 
@@ -159,138 +311,142 @@ const MetricsContainer = () => {
     }]
   });
   //Swap graph and state
-  const [userSwap,setUserSwap] = useState({
-    labels: [],
-    datasets: [{
-      label: 'Container Swap',
-      // data = y-axis
-      data: [],
-      // backgroundColor = color of each individual bar/dot/slice
+  //   const [userSwap,setUserSwap] = useState({
+  //     labels: [],
+  //     datasets: [{
+  //       label: 'Container Swap',
+  //       // data = y-axis
+  //       data: [],
+  //       // backgroundColor = color of each individual bar/dot/slice
     
-      backgroundColor: [  
-        '#f0ecf6',
-        '#e1d9ec',
-        '#d3c5e3',
-        '#c4b2d9',
-        '#b59fd0',
-        '#a68cc6',
-        '#9779bd',
-        '#8965b3',
-        '#7a52aa',
-        '#6b3fa0'
-      ],
-      borderColor: 'grey',
-      borderWidth: 2
-    }]
-  });
-
-
-  /*
-    [
-        {
-            container_name: 'first container',
-            container_id: '57',
-            cpu_percent: 0.04,
-            avg_cpu: 0.04,
-            mem_usage: 51.45,
-            mem_Limit: 2114.56,
-            mem_percent: 2.49,
-            net_input: 0.001,
-            net_output: 0.003,
-            block_input: 59.45,
-            block_output: 0.008,
-            pids: 35,
-            created_at: 2022-07-19 16:02:51 +0000
-        },
-        {
-            container_name: 'first container',
-            container_id: '57',
-
-            cpu_percent: 0.04,
-            avg_cpu: 0.04, // how much on average you're using (%)
-
-            mem_usage: 51.00, // amount mem MB
-            mem_Limit: 2114.56, // MB
-            mem_percent: 2.49, // mem usage compared to mem limit
-
-            net_input: 0.002,
-            net_output: 0.003,
-
-            block_input: 59.45,
-            block_output: 0.008,
-            
-            pids: 35,
-            created_at: 2022-07-19 18:02:51 +0000
-        }
-    ] 
-*/
-
-  // declare created_at array and reassign to all labels properties
-
-  // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
-  // const cpu = [.04, .06]
-  // const memory = [51.45, 51.00]
-  // const userIO = [0.001, 0.002]
-
-  // call each set state callback to update labels array and datasets.data array in relevent graphs
+  //       backgroundColor: [  
+  //         '#f0ecf6',
+  //         '#e1d9ec',
+  //         '#d3c5e3',
+  //         '#c4b2d9',
+  //         '#b59fd0',
+  //         '#a68cc6',
+  //         '#9779bd',
+  //         '#8965b3',
+  //         '#7a52aa',
+  //         '#6b3fa0'
+  //       ],
+  //       borderColor: 'grey',
+  //       borderWidth: 2
+  //     }]
+  //   });
 
 
   // fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
-    fetch('/containers/stats', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then(data => {
-        console.log(data);
-        data.json();
-      })
-      .then(data => {
-        //loop through data and replace each object in containderData array with incoming objects
-        const createdAt = [];
+    // console.log(res);
+    // console.log('hi');
+    //     console.log(dataF);
+    // fetch('/containers/stats', {
+    //   method: 'GET',
+    //   headers: { 'Content-Type': 'application/json' },
+    // })
 
-        const cpuPercent = [];
-        const memory = [];
-        const userIO = [];
+    //   .then(res => {
+    //     console.log(res);
+    //     res.json();
+    //   })
+    //   .then(data => {
+    //loop through data and replace each object in containderData array with incoming objects
+    const createdAt = [];
 
-        for (const obj of data) {
-          for (const key in obj) {
-            if (key === 'created_at') {
-              createdAt.push(obj[key]);
-            }
-            if (key === 'cpu_percent') {
-              cpuPercent.push(obj[key]);
-            }
-            if (key === 'mem_percent') {
-              memory.push(obj[key]);
-            }
-          }
-        }
+    const cpuPercent = [];
+    const memory = [];
+    const userIO = [];
 
-        setUserCpu({
-          labels: createdAt,
-          datasets: [{
-            data: cpuPercent
-          }]
-        });
+    for (let i = 0; i < res.length; i++) {
+      createdAt.push(res[i].created_at);
+      cpuPercent.push(res[i].cpu_perc);
+      memory.push(res[i].memory_perc);
+      userIO.push(res[i].net_input);
+    }
 
-        setUserMemory({
-          labels: createdAt,
-          datasets: [{
-            data: memory,
-          }]
-        });
-        setUserIO({
-          labels: createdAt,
-          datasets: [{
-            data: userIO,
-          }]
-        });
-      })
+    setUserCpu({
+      labels: createdAt,
+      datasets: [{
+        label: 'Memory Percentage',
+        // data = y-axis
+        //pass in memArr
+        data: cpuPercent,
+        // backgroundColor = color of each individual bar/dot/slice
+        //we need to add 10 colors here 
+        backgroundColor: [  
+          '#f0ecf6',
+          '#e1d9ec',
+          '#d3c5e3',
+          '#c4b2d9',
+          '#b59fd0',
+          '#a68cc6',
+          '#9779bd',
+          '#8965b3',
+          '#7a52aa',
+          '#6b3fa0'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      }]
+    });
 
-      .catch((error) => {
-        console.error('Error: ', error);
-      });
+    setUserMemory({
+      labels: createdAt,
+      datasets: [{
+        label: 'Memory Percentage',
+        // data = y-axis
+        //pass in memArr
+        data: memory,
+        // backgroundColor = color of each individual bar/dot/slice
+        //we need to add 10 colors here 
+        backgroundColor: [  
+          '#f0ecf6',
+          '#e1d9ec',
+          '#d3c5e3',
+          '#c4b2d9',
+          '#b59fd0',
+          '#a68cc6',
+          '#9779bd',
+          '#8965b3',
+          '#7a52aa',
+          '#6b3fa0'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      }]
+    });
+    setUserIO({
+      labels: createdAt,
+      datasets: [{
+        label: 'Memory Percentage',
+        // data = y-axis
+        //pass in memArr
+        data: userIO,
+        // backgroundColor = color of each individual bar/dot/slice
+        //we need to add 10 colors here 
+        backgroundColor: [  
+          '#f0ecf6',
+          '#e1d9ec',
+          '#d3c5e3',
+          '#c4b2d9',
+          '#b59fd0',
+          '#a68cc6',
+          '#9779bd',
+          '#8965b3',
+          '#7a52aa',
+          '#6b3fa0'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      }]
+    });
+    //  })
+
+    //   .catch((error) => {
+    //     console.error('Error: ', error);
+    //   });
   };
 
 
