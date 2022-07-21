@@ -27,6 +27,7 @@ module.exports = {
   },
 
   getStats: (req, res, next) => {
+    console.log('here')
     exec('podman stats --no-stream --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
@@ -36,7 +37,7 @@ module.exports = {
       } 
       else {
         console.log('executed contaienerController.getStats');
-        const  metrics = parseStats(JSON.parse(stdout));
+        const metrics = parseStats(JSON.parse(stdout));
         res.locals.metrics = metrics;
         next();
       }
