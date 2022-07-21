@@ -11,33 +11,73 @@ import { dummyData } from './data';
 //make fetch request in here here to server 
 //receiving a JSON from the server
 //need to test
-const dataArr = [];
 
 //net io amount of data the container has sent and recieved 
 //block io the amount of data the container has read to write from the devices on the host
 
 //wrap with the use effect hook to be on load
 //declare state up here
+// {
+//   container_name: 'first container',
+//   container_id: '57',
+//   cpu_percent: 0.04,
+//   avg_cpu: 0.04,
+//   mem_usage: 51.45,
+//   mem_Limit: 2114.56,
+//   mem_percent: 2.49,
+//   net_input: 0.001,
+//   net_output: 0.003,
+//   block_input: 59.45,
+//   block_output: 0.008,
+//   pids: 35,
+//   created_at: 2022-07-19 16:02:51 +0000
+// }
 
 const MetricsContainer = () => {
   //wrap with the use effect hook to be on load
   //declare state up here
-const [dataList,setDataList] = useState({ dataPoints:[] })
-useEffect(() => {
-  const fetch = async () => {
-    const results = await axios(
-      '/container/stats'
-    )
-    setDataList(results.dataList)
-  }
-})
+  useEffect(() => {
+    axios.get('/container/stats')
+      .then( res => {
+        const createArr = [];
+        const cpuArr = [];
+        const memArr = [];
+        const ioArr = [];
+        for (let i = 0; i < res.length; i++) {
+          createArr.push(res[i].created_at);
+          cpuArr.push(res[i].cpu_percent);
+          memArr.push(res[i].mem_percent);
+          ioArr.push(res[i].net_io);
+        }
+        setUserCpu({
+          labels:createArr, 
+          datasets:[{
+            data:cpuArr
+          }]
+        });
+        setUserMemory({
+          labels:createArr, 
+          datasets:[{
+            data:memArr
+          }]
+        });
+        setUserIO({
+          labels:createArr, 
+          datasets:[{
+            data:ioArr
+          }]
+        });
+      });
+  },[]);
   
   const [userCpu,setUserCpu] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    //passing in created_at array
+    labels: [],
     datasets: [{
       label: 'CPU Percentage',
       // data = y-axis
-      data: dummyData.map((data) => data.cpu_percent),
+      //passing in cpuArr
+      data:[],
       // backgroundColor = color of each individual bar/dot/slice
       backgroundColor: [  
         '#f0ecf6',
@@ -58,11 +98,13 @@ useEffect(() => {
 
   //Memory graph and state
   const [userMemory,setUserMemory] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    //pass in created_at array
+    labels: [],
     datasets: [{
       label: 'Memory Percentage',
       // data = y-axis
-      data: dummyData.map((data) => data.mem_percent),
+      //pass in memArr
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
       //we need to add 10 colors here 
       backgroundColor: [  
@@ -83,11 +125,12 @@ useEffect(() => {
   });
   //InputOutput graph and state
   const [userIO,setUserIO] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    //
+    labels: [],
     datasets: [{
-      label: 'Net Input Output',
+      label: 'Net Input',
       // data = y-axis
-      data: dummyData.map((data) => data.net_io),
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
       backgroundColor: [  
         '#f0ecf6',
@@ -107,11 +150,11 @@ useEffect(() => {
   });
   //Swap graph and state
   const [userSwap,setUserSwap] = useState({
-    labels: dummyData.map((data) => data.created_at),
+    labels: [],
     datasets: [{
       label: 'Container Swap',
       // data = y-axis
-      data: dummyData.map((data) => data.swap),
+      data: [],
       // backgroundColor = color of each individual bar/dot/slice
     
       backgroundColor: [  
