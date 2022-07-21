@@ -70,6 +70,16 @@ const MetricsContainer = () => {
       });
   },[]);
   
+
+
+
+  // fetch get request to server will return an array of objects
+  // loop through incoming array of objects
+  // push values of created_at into labels array
+  // push values of each property into datasets.data array
+
+  // should initialize labels and datasets.data to empty arrays
+
   const [userCpu,setUserCpu] = useState({
     //passing in created_at array
     labels: [],
@@ -174,10 +184,121 @@ const MetricsContainer = () => {
     }]
   });
 
+
+  /*
+    [
+        {
+            container_name: 'first container',
+            container_id: '57',
+            cpu_percent: 0.04,
+            avg_cpu: 0.04,
+            mem_usage: 51.45,
+            mem_Limit: 2114.56,
+            mem_percent: 2.49,
+            net_input: 0.001,
+            net_output: 0.003,
+            block_input: 59.45,
+            block_output: 0.008,
+            pids: 35,
+            created_at: 2022-07-19 16:02:51 +0000
+        },
+        {
+            container_name: 'first container',
+            container_id: '57',
+
+            cpu_percent: 0.04,
+            avg_cpu: 0.04, // how much on average you're using (%)
+
+            mem_usage: 51.00, // amount mem MB
+            mem_Limit: 2114.56, // MB
+            mem_percent: 2.49, // mem usage compared to mem limit
+
+            net_input: 0.002,
+            net_output: 0.003,
+
+            block_input: 59.45,
+            block_output: 0.008,
+            
+            pids: 35,
+            created_at: 2022-07-19 18:02:51 +0000
+        }
+    ] 
+*/
+
+  // declare created_at array and reassign to all labels properties
+
+  // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
+  // const cpu = [.04, .06]
+  // const memory = [51.45, 51.00]
+  // const userIO = [0.001, 0.002]
+
+  // call each set state callback to update labels array and datasets.data array in relevent graphs
+
+
+  // fetch data when Update Metrics button is clicked
+  const updateMetrics = () => {
+    fetch('/containers/stats', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(data => {
+        console.log(data);
+        data.json();
+      })
+      .then(data => {
+        //loop through data and replace each object in containderData array with incoming objects
+        const createdAt = [];
+
+        const cpuPercent = [];
+        const memory = [];
+        const userIO = [];
+
+        for (const obj of data) {
+          for (const key in obj) {
+            if (key === 'created_at') {
+              createdAt.push(obj[key]);
+            }
+            if (key === 'cpu_percent') {
+              cpuPercent.push(obj[key]);
+            }
+            if (key === 'mem_percent') {
+              memory.push(obj[key]);
+            }
+          }
+        }
+
+        setUserCpu({
+          labels: createdAt,
+          datasets: [{
+            data: cpuPercent
+          }]
+        });
+
+        setUserMemory({
+          labels: createdAt,
+          datasets: [{
+            data: memory,
+          }]
+        });
+        setUserIO({
+          labels: createdAt,
+          datasets: [{
+            data: userIO,
+          }]
+        });
+      })
+
+      .catch((error) => {
+        console.error('Error: ', error);
+      });
+  };
+
+
+
   return (
     <div className="metrics-container">
       {/* <h2>This is the Metrics Container</h2> */}
-      <button className="update-metrics">Update Metrics</button>
+      <button className="update-metrics" onClick={updateMetrics}>Update Metrics</button>
       < CPU chartData={userCpu}/>
       < Memory chartData={userMemory}/>
       < InputOutput chartData={userIO}/>
