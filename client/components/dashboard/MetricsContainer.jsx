@@ -11,54 +11,83 @@ import { dummyData } from './data';
 //make fetch request in here here to server 
 //receiving a JSON from the server
 //need to test
-const dataArr = [];
 
 //net io amount of data the container has sent and recieved 
 //block io the amount of data the container has read to write from the devices on the host
 
 //wrap with the use effect hook to be on load
 //declare state up here
+// {
+//   container_name: 'first container',
+//   container_id: '57',
+//   cpu_percent: 0.04,
+//   avg_cpu: 0.04,
+//   mem_usage: 51.45,
+//   mem_Limit: 2114.56,
+//   mem_percent: 2.49,
+//   net_input: 0.001,
+//   net_output: 0.003,
+//   block_input: 59.45,
+//   block_output: 0.008,
+//   pids: 35,
+//   created_at: 2022-07-19 16:02:51 +0000
+// }
 
 const MetricsContainer = () => {
   //wrap with the use effect hook to be on load
   //declare state up here
-// const [dataList,setDataList] = useState({ dataPoints:[] })
-
-
-
-useEffect(() => {
-  const fetch = async () => {
-    const results = await axios(
-      '/container/stats'
-    )
-    // declare created_at array and reassign to all labels properties
-
-    // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
-    // const cpu = [.04, .06]
-    // const memory = [51.45, 51.00]
-    // const userIO = [0.001, 0.002]
-
-    // call each set state callback to update labels array and datasets.data array in relevent graphs
-    setUserCpu(results.dataList)
+  useEffect(() => {
+    axios.get('/container/stats')
+      .then( res => {
+        const createArr = [];
+        const cpuArr = [];
+        const memArr = [];
+        const ioArr = [];
+        for (let i = 0; i < res.length; i++) {
+          createArr.push(res[i].created_at);
+          cpuArr.push(res[i].cpu_percent);
+          memArr.push(res[i].mem_percent);
+          ioArr.push(res[i].net_io);
+        }
+        setUserCpu({
+          labels:createArr, 
+          datasets:[{
+            data:cpuArr
+          }]
+        });
+        setUserMemory({
+          labels:createArr, 
+          datasets:[{
+            data:memArr
+          }]
+        });
+        setUserIO({
+          labels:createArr, 
+          datasets:[{
+            data:ioArr
+          }]
+        });
+      });
+  },[]);
   
-  }
-}, [])
 
-    // fetch get request to server will return an array of objects
-    // loop through incoming array of objects
-    // push values of created_at into labels array
-    // push values of each property into datasets.data array
+
+
+  // fetch get request to server will return an array of objects
+  // loop through incoming array of objects
+  // push values of created_at into labels array
+  // push values of each property into datasets.data array
 
   // should initialize labels and datasets.data to empty arrays
 
   const [userCpu,setUserCpu] = useState({
-    // created_at values
+    //passing in created_at array
     labels: [],
     datasets: [{
       label: 'CPU Percentage',
       // data = y-axis
-      // cpu_percent values
-      data: [],
+      //passing in cpuArr
+      data:[],
       // backgroundColor = color of each individual bar/dot/slice
       backgroundColor: [  
         '#f0ecf6',
@@ -79,10 +108,12 @@ useEffect(() => {
 
   //Memory graph and state
   const [userMemory,setUserMemory] = useState({
+    //pass in created_at array
     labels: [],
     datasets: [{
       label: 'Memory Percentage',
       // data = y-axis
+      //pass in memArr
       data: [],
       // backgroundColor = color of each individual bar/dot/slice
       //we need to add 10 colors here 
@@ -104,9 +135,10 @@ useEffect(() => {
   });
   //InputOutput graph and state
   const [userIO,setUserIO] = useState({
+    //
     labels: [],
     datasets: [{
-      label: 'Net Input Output',
+      label: 'Net Input',
       // data = y-axis
       data: [],
       // backgroundColor = color of each individual bar/dot/slice
@@ -193,21 +225,21 @@ useEffect(() => {
     ] 
 */
 
-   // declare created_at array and reassign to all labels properties
+  // declare created_at array and reassign to all labels properties
 
-    // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
-    // const cpu = [.04, .06]
-    // const memory = [51.45, 51.00]
-    // const userIO = [0.001, 0.002]
+  // const createdAt = [2022-07-19 16:02:51 +0000, 2022-07-19 18:02:51 +0000]
+  // const cpu = [.04, .06]
+  // const memory = [51.45, 51.00]
+  // const userIO = [0.001, 0.002]
 
-    // call each set state callback to update labels array and datasets.data array in relevent graphs
+  // call each set state callback to update labels array and datasets.data array in relevent graphs
 
 
   // fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
     fetch('/containers/stats', {
       method: 'GET',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
     })
       .then(data => {
         console.log(data);
@@ -224,35 +256,35 @@ useEffect(() => {
         for (const obj of data) {
           for (const key in obj) {
             if (key === 'created_at') {
-                createdAt.push(obj[key])
+              createdAt.push(obj[key]);
             }
             if (key === 'cpu_percent') {
-                cpuPercent.push(obj[key])
+              cpuPercent.push(obj[key]);
             }
             if (key === 'mem_percent') {
-                memory.push(obj[key])
+              memory.push(obj[key]);
             }
           }
         }
 
         setUserCpu({
-            labels: createdAt,
-            datasets: [{
-                data: cpuPercent
-            }]
+          labels: createdAt,
+          datasets: [{
+            data: cpuPercent
+          }]
         });
 
         setUserMemory({
-            labels: createdAt,
-            datasets: [{
-                data: memory,
-            }]
+          labels: createdAt,
+          datasets: [{
+            data: memory,
+          }]
         });
         setUserIO({
-            labels: createdAt,
-            datasets: [{
-                data: userIO,
-            }]
+          labels: createdAt,
+          datasets: [{
+            data: userIO,
+          }]
         });
       })
 

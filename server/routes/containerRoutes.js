@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const containerController = require('../controllers/containerController');
+const dbController = require('../controllers/dbController');
 
-
-router.get('/stats' , containerController.getStats, (req, res) => {
-  return res.status(200).json(res.locals.metrics);
+router.get('/stats' , containerController.getStats, dbController.insertData, dbController.getData, (req, res) => {
+  return res.status(200).json(res.locals.data);
 });
 
 router.get('/', containerController.getContainers, (req, res) => {
