@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development concurrently \"webpack-dev-server --hot\" \"nodemon ./server/server.js\"",
     "build": "NODE_ENV=production webpack",
     "startElectron": "electron ./out/electron/electron.js",
-    "buildTs": "tsc",
+    "buildTs": "tsc && cp ./src/website/index.html ./out/website/index.html",
     "build:watch": "npm run buildTs -- --watch"
   },
   "repository": {

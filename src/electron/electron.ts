@@ -8,5 +8,5 @@ app.on('ready', () => {
   window.setMenuBarVisibility(false);
 
   // load a website to display
-  window.loadURL(`http://example.com`);
+  window.loadURL(`file://${__dirname}/../website/index.html`);
 });
