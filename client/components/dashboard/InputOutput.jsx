@@ -6,7 +6,7 @@ const InputOutput = ({chartData}) => {
 
   return (
     <div className='input-output'>
-      <h5>Input output graph</h5>
+      <h5>Input/Output</h5>
       < Line data={chartData}/>
     </div>
   );

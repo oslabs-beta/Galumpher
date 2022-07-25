@@ -8,7 +8,9 @@ const CPU = ({chartData}) => {
   return (
     <div className="cpu">
       <h5>CPU Usage Percentage</h5>
-      < Line data={chartData}/>
+      < Line 
+            data={chartData}
+            />
     </div>
   );
 };

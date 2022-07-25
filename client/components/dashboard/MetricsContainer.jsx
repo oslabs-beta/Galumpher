@@ -1,41 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import CPU from './cpu';
 import Memory from './memory';
 import InputOutput from './InputOutput';
 // import Swap from './swap';
-// import { dummyData } from './data';
-
-//make fetch request in here here to server 
-//receiving a JSON from the server
-//need to test
-
-//net io amount of data the container has sent and recieved 
-//block io the amount of data the container has read to write from the devices on the host
-
-//wrap with the use effect hook to be on load
-//declare state up here
-// {
-//   container_name: 'first container',
-//   container_id: '57',
-//   cpu_percent: 0.04,
-//   avg_cpu: 0.04,
-//   mem_usage: 51.45,
-//   mem_Limit: 2114.56,
-//   mem_percent: 2.49,
-//   net_input: 0.001,
-//   net_output: 0.003,
-//   block_input: 59.45,
-//   block_output: 0.008,
-//   pids: 35,
-//   created_at: 2022-07-19 16:02:51 +0000
-// }
-
+import { dummyData } from './data';
 
 
 const MetricsContainer = () => {
+  console.log(dummyData);
+
   useEffect(() => {
     fetch('/containers/stats', {
       method: 'GET',
@@ -48,54 +23,43 @@ const MetricsContainer = () => {
         const cpuArr = [];
         const memArr = [];
         const ioArr = [];
+        const userOutput = [];
+
         for (let i = 0; i < res.length; i++) {
           console.log('entered loop');
           createArr.push(res[i].created_at);
           cpuArr.push(res[i].cpu_perc);
           memArr.push(res[i].memory_perc);
           ioArr.push(res[i].net_input);
+          userOutput.push(res[i].net_output);
         }
         console.log(createArr);
         console.log(cpuArr);
         console.log(memArr);
         console.log(ioArr);
+
         setUserCpu({
           labels:createArr,
           datasets:[{
             label: 'CPU Percentage',
             data:cpuArr,
+            fill: true,
             backgroundColor: [
-              '#f0ecf6',
-              '#e1d9ec',
-              '#d3c5e3',
-              '#c4b2d9',
-              '#b59fd0',
-              '#a68cc6',
-              '#9779bd',
-              '#8965b3',
-              '#7a52aa',
-              '#6b3fa0'
+              '#355070'
             ],
             borderColor: 'grey',
             borderWidth: 2
-          }]
+          },
+          ]
         });
         setUserMemory({
           labels:createArr,
           datasets:[{
             label: 'Memory Percentage',
             data:memArr,
+            fill: true,
             backgroundColor: [
-              '#f0ecf6',
-              '#e1d9ec',
-              '#d3c5e3',
-              '#c4b2d9',
-              '#b59fd0',
-              '#a68cc6',
-              '#9779bd',
-              '#8965b3',
-              '#7a52aa',
-              '#6b3fa0'
+              '#6d597a'
             ],
             borderColor: 'grey',
             borderWidth: 2
@@ -106,34 +70,33 @@ const MetricsContainer = () => {
           datasets:[{
             label: 'Net Input',
             data:ioArr,
+            fill: true,
             backgroundColor: [
-              '#f0ecf6',
-              '#e1d9ec',
-              '#d3c5e3',
-              '#c4b2d9',
-              '#b59fd0',
-              '#a68cc6',
-              '#9779bd',
-              '#8965b3',
-              '#7a52aa',
-              '#6b3fa0'
+              '#e56b6f'
+            ],
+            borderColor: 'grey',
+            borderWidth: 2
+          },
+          {
+            label: 'Net output',
+            // data = y-axis
+            //pass in memArr
+            data: userOutput,
+            fill: true,
+            backgroundColor: [  
+              '#b56576'
             ],
             borderColor: 'grey',
             borderWidth: 2
           }]
         });
     
-      });
+      }
+      );
   }, []);
   
 
-  // fetch get request to server will return an array of objects
-  // loop through incoming array of objects
-  // push values of created_at into labels array
-  // push values of each property into datasets.data array
-
-  // should initialize labels and datasets.data to empty arrays
-
+  // initial states
   const [userCpu,setUserCpu] = useState({
     //passing in created_at array
     labels: [],
@@ -142,18 +105,9 @@ const MetricsContainer = () => {
       // data = y-axis
       //passing in cpuArr
       data:[],
-      // backgroundColor = color of each individual bar/dot/slice
-      backgroundColor: [  
-        '#f0ecf6',
-        '#e1d9ec',
-        '#d3c5e3',
-        '#c4b2d9',
-        '#b59fd0',
-        '#a68cc6',
-        '#9779bd',
-        '#8965b3',
-        '#7a52aa',
-        '#6b3fa0'
+      fill: true,
+      backgroundColor: [
+        '#355070'
       ],
       borderColor: 'grey',
       borderWidth: 2
@@ -169,19 +123,9 @@ const MetricsContainer = () => {
       // data = y-axis
       //pass in memArr
       data: [],
-      // backgroundColor = color of each individual bar/dot/slice
-      //we need to add 10 colors here 
-      backgroundColor: [  
-        '#f0ecf6',
-        '#e1d9ec',
-        '#d3c5e3',
-        '#c4b2d9',
-        '#b59fd0',
-        '#a68cc6',
-        '#9779bd',
-        '#8965b3',
-        '#7a52aa',
-        '#6b3fa0'
+      fill: true,
+      backgroundColor: [
+        '#6d597a'
       ],
       borderColor: 'grey',
       borderWidth: 2
@@ -195,22 +139,26 @@ const MetricsContainer = () => {
       label: 'Net Input',
       // data = y-axis
       data: [],
-      // backgroundColor = color of each individual bar/dot/slice
-      backgroundColor: [  
-        '#f0ecf6',
-        '#e1d9ec',
-        '#d3c5e3',
-        '#c4b2d9',
-        '#b59fd0',
-        '#a68cc6',
-        '#9779bd',
-        '#8965b3',
-        '#7a52aa',
-        '#6b3fa0'
+      fill: true,
+      backgroundColor: [
+        '#b56576'
       ],
       borderColor: 'grey',
       borderWidth: 2
-    }]
+    },
+    {
+      label: 'Net output',
+      // data = y-axis
+      //pass in memArr
+      data: [],
+      fill: true,
+      backgroundColor: [  
+        '#e56b6f'
+      ],
+      borderColor: 'grey',
+      borderWidth: 2
+    }
+    ]
   });
   //Swap graph and state
   //   const [userSwap,setUserSwap] = useState({
@@ -250,19 +198,21 @@ const MetricsContainer = () => {
       .then(data => data.json())
       .then(res => {
         res = res.reverse();
-        console.log('RES:', res);
+        // console.log('RES:', res);
         //loop through data and replace each object in containderData array with incoming objects
         const createdAt = [];
 
         const cpuPercent = [];
         const memory = [];
-        const userIO = [];
+        const userInput = [];
+        const userOutput = [];
 
         for (let i = 0; i < res.length; i++) {
           createdAt.push(res[i].created_at);
           cpuPercent.push(res[i].cpu_perc);
           memory.push(res[i].memory_perc);
-          userIO.push(res[i].net_input);
+          userInput.push(res[i].net_input);
+          userOutput.push(res[i].net_output);
         }
 
         setUserCpu({
@@ -272,19 +222,9 @@ const MetricsContainer = () => {
             // data = y-axis
             //pass in memArr
             data: cpuPercent,
-            // backgroundColor = color of each individual bar/dot/slice
-            //we need to add 10 colors here 
-            backgroundColor: [  
-              '#f0ecf6',
-              '#e1d9ec',
-              '#d3c5e3',
-              '#c4b2d9',
-              '#b59fd0',
-              '#a68cc6',
-              '#9779bd',
-              '#8965b3',
-              '#7a52aa',
-              '#6b3fa0'
+            fill: true,
+            backgroundColor: [
+              '#355070'
             ],
             borderColor: 'grey',
             borderWidth: 2
@@ -298,19 +238,9 @@ const MetricsContainer = () => {
             // data = y-axis
             //pass in memArr
             data: memory,
-            // backgroundColor = color of each individual bar/dot/slice
-            //we need to add 10 colors here 
-            backgroundColor: [  
-              '#f0ecf6',
-              '#e1d9ec',
-              '#d3c5e3',
-              '#c4b2d9',
-              '#b59fd0',
-              '#a68cc6',
-              '#9779bd',
-              '#8965b3',
-              '#7a52aa',
-              '#6b3fa0'
+            fill: true,
+            backgroundColor: [
+              '#6d597a'
             ],
             borderColor: 'grey',
             borderWidth: 2
@@ -322,27 +252,29 @@ const MetricsContainer = () => {
             label: 'Net input',
             // data = y-axis
             //pass in memArr
-            data: userIO,
-            // backgroundColor = color of each individual bar/dot/slice
-            //we need to add 10 colors here 
-            backgroundColor: [  
-              '#f0ecf6',
-              '#e1d9ec',
-              '#d3c5e3',
-              '#c4b2d9',
-              '#b59fd0',
-              '#a68cc6',
-              '#9779bd',
-              '#8965b3',
-              '#7a52aa',
-              '#6b3fa0'
+            data: userInput,
+            fill: true,
+            backgroundColor: [
+              '#e56b6f'
             ],
             borderColor: 'grey',
             borderWidth: 2
-          }]
+          },
+          {
+            label: 'Net output',
+            // data = y-axis
+            //pass in memArr
+            data: userOutput,
+            fill: true,
+            backgroundColor: [  
+              '#b56576'
+            ],
+            borderColor: 'grey',
+            borderWidth: 2
+          }
+          ]
         });
       })
-
       .catch((error) => {
         console.error('Error: ', error);
       });
