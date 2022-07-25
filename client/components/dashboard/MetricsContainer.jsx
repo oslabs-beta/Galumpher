@@ -241,6 +241,7 @@ const MetricsContainer = () => {
 
   // fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
+    // const res = dummydata.reverse();
     fetch('/containers/stats', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
