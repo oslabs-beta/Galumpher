@@ -1,7 +1,7 @@
 import React from 'react';
-import Dashboard from './dashboard/Dashboard.jsx';
-import Header from './Header.jsx';
-import NavBar from './dashboard/navbar.jsx';
+import Dashboard from './dashboard/Dashboard';
+import Header from './Header';
+import NavBar from './dashboard/NavBar';
 
 const App = () => {
 

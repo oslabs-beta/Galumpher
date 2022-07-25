@@ -3,29 +3,29 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './src/index.js',
+  entry: './src/website/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'out/website'),
     filename: 'bundle.js',
   },
   plugins: [new HtmlWebpackPlugin({
     title: 'Development',
-    template: path.resolve(__dirname, 'index.html'),
+    template: path.resolve(__dirname, './src/website/index.html'),
   })],
-  target: 'web',
-  devServer: {
-    static: {
-      // publicPath: '/build',
-      directory: path.resolve(__dirname, 'build'),
-    },
-    proxy: {
-      '/': 'http://localhost:3333',
-    },
-    compress: true,
-    port: 8080,
-  },
+  target: 'electron-renderer',
+  // devServer: {
+  //   static: {
+  //     // publicPath: '/build',
+  //     directory: path.resolve(__dirname, 'build'),
+  //   },
+  //   proxy: {
+  //     '/': 'http://localhost:3333',
+  //   },
+  //   compress: true,
+  //   port: 8080,
+  // },
   resolve: {
-    extensions: ['.jsx', '.js', '.json'],
+    extensions: ['.jsx', '.js', '.json', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -38,6 +38,10 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
       },
       {
         test: /\.css$/,

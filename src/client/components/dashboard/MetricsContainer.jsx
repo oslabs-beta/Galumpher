@@ -1,29 +1,37 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import CPU from './cpu';
-import Memory from './memory';
+import CPU from './CPU';
+import Memory from './Memory';
 import InputOutput from './InputOutput';
 // import Swap from './swap';
-import { dummyData } from './data';
+// import { dummyData } from './data';
+// import { strArray } from '../../../types/globalTypes'
 
 
 const MetricsContainer = () => {
-  console.log(dummyData);
 
   useEffect(() => {
-    fetch('/containers/stats', {
+    fetch('localhost:3333/containers/stats', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     }).then((data) => data.json())
       .then( res => {
         res = res.reverse();
         console.log(res);
+       
         const createArr = [];
         const cpuArr = [];
         const memArr = [];
         const ioArr = [];
         const userOutput = [];
+
+        // TYPESCRIPT
+        // const createArr: strArray = [];
+        // const cpuArr: strArray = [];
+        // const memArr: strArray = [];
+        // const ioArr: strArray = [];
+        // const userOutput: strArray = [];
 
         for (let i = 0; i < res.length; i++) {
           console.log('entered loop');

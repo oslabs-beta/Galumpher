@@ -14,7 +14,7 @@ const dbRoutes = require('./routes/dbRoutes');
 app.use(express.json());
 
 // Always respond with the static assets
-app.use(express.static(path.resolve(__dirname, '../build')));
+app.use(express.static(path.resolve(__dirname, '../out/website')));
 
 // Basic commands - start, stop etc.
 app.use('/commands', mainCommandsRoutes);
@@ -27,7 +27,7 @@ app.use('/db', dbRoutes);
 
 // Send the react app 
 app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'));
+  return res.status(200).sendFile(path.resolve(__dirname, '../out/website/index.html'));
 });
 
 // Local errors
