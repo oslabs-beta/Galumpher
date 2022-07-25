@@ -12,18 +12,18 @@ module.exports = {
     title: 'Development',
     template: path.resolve(__dirname, './src/website/index.html'),
   })],
-  target: 'electron-renderer',
-  // devServer: {
-  //   static: {
-  //     // publicPath: '/build',
-  //     directory: path.resolve(__dirname, 'build'),
-  //   },
-  //   proxy: {
-  //     '/': 'http://localhost:3333',
-  //   },
-  //   compress: true,
-  //   port: 8080,
-  // },
+  // target: 'electron-renderer',
+  devServer: {
+    static: {
+      // publicPath: '/build',
+      directory: path.resolve(__dirname, 'build'),
+    },
+    proxy: {
+      '/': 'http://localhost:3333',
+    },
+    compress: true,
+    port: 8080,
+  },
   resolve: {
     extensions: ['.jsx', '.js', '.json', '.ts', '.tsx'],
   },

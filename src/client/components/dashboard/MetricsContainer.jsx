@@ -12,7 +12,7 @@ import InputOutput from './InputOutput';
 const MetricsContainer = () => {
 
   useEffect(() => {
-    fetch('localhost:3333/containers/stats', {
+    fetch('containers/stats', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     }).then((data) => data.json())
@@ -197,7 +197,7 @@ const MetricsContainer = () => {
 
   // fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
-    fetch('/containers/stats', {
+    fetch('containers/stats', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })
