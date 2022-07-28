@@ -2,7 +2,7 @@ import React from 'react';
 // import {createRoot} from 'react-dom/client';
 import * as ReactDOM from 'react-dom';
 import App from '../client/components/App'
-// import styles from '../../client/scss/dashboard.scss';
+import styles from '../scss/dashboard.scss';
 
 const app = document.getElementById('root');
 

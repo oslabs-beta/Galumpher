@@ -1,5 +1,9 @@
 const { app, BrowserWindow } = require('electron');
 
+let localHost = 'localhost:3333';
+if (process.env.NODE_ENV === 'development') localHost = 'localhost:8080';
+
+
 app.on('ready', () => {
   // once electron has started up, create a window.
   const window = new BrowserWindow({ width: 800, height: 600 });
@@ -8,5 +12,5 @@ app.on('ready', () => {
   window.setMenuBarVisibility(false);
 
   // load a website to display
-  window.loadURL(`file://${__dirname}/../website/index.html`);
+  window.loadURL('http://localhost:8080');
 });
