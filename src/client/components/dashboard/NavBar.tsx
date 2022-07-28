@@ -1,5 +1,5 @@
 import React from 'react';
-import GalumphingIcon from '../../../../client/images/galumphing-icon.png';
+import GalumphingIcon from '../../images/galumphing-icon.png';
 
 const NavBar = () => {
 
