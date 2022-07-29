@@ -5,7 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 
 import GalumphingIcon from '../../images/galumphing-icon.png';
-import { NavbarData } from './NavbarData';
+import { NavbarData } from './NavbarData.js';
 import SubMenu from './SubMenu';
 
 const NavbarItems = styled.nav`
