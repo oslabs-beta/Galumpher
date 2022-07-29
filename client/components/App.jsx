@@ -1,7 +1,8 @@
 import React from 'react';
 import Dashboard from './dashboard/Dashboard.jsx';
 import Header from './Header.jsx';
-import NavBar from './dashboard/navbar.jsx';
+import NavBar from './navbar/NavBar.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
@@ -9,7 +10,10 @@ const App = () => {
     <div className='app'>
       < Header />
       <div className='app-body'>
-        < NavBar />
+        <Router>
+          < NavBar />
+        </Router>
+  
         < Dashboard />
       </div>
     </div>
