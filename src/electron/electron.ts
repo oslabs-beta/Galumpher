@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 
-let localHost = 'localhost:3333';
-if (process.env.NODE_ENV === 'development') localHost = 'localhost:8080';
+const localHost = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'http://localhost:3333';
 
 
 app.on('ready', () => {
@@ -12,5 +11,5 @@ app.on('ready', () => {
   window.setMenuBarVisibility(false);
 
   // load a website to display
-  window.loadURL('http://localhost:8080');
+  window.loadURL(localHost);
 });

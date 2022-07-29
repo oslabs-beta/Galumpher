@@ -62,7 +62,8 @@ const MetricsContainer = () => {
   }]
   }
   useEffect(() => {
-    fetch('containers/stats', {
+    // const res = dummyData.reverse();
+    fetch('/containers/stats', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     }).then((data) => data.json())
@@ -91,10 +92,10 @@ const MetricsContainer = () => {
           ioArr.push(res[i].net_input);
           userOutput.push(res[i].net_output);
         }
-        console.log(createArr);
-        console.log(cpuArr);
-        console.log(memArr);
-        console.log(ioArr);
+        // console.log(createArr);
+        // console.log(cpuArr);
+        // console.log(memArr);
+        // console.log(ioArr);
 
         setUserCpu({
           labels:createArr,

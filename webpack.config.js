@@ -12,10 +12,8 @@ module.exports = {
     title: 'Development',
     template: path.resolve(__dirname, './src/website/index.html'),
   })],
-  // target: 'electron-renderer',
   devServer: {
     static: {
-      // publicPath: '/build',
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
@@ -25,7 +23,7 @@ module.exports = {
     port: 8080,
   },
   resolve: {
-    extensions: ['.jsx', '.js', '.json', '.ts', '.tsx'],
+    extensions: ['.jsx', '.js', '.json', '.ts', '.tsx', '.css', '.scss'],
   },
   module: {
     rules: [
