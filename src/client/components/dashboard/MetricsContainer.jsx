@@ -12,95 +12,88 @@ import InputOutput from './InputOutput';
 const MetricsContainer = () => {
 
   useEffect(() => {
-    fetch('containers/stats', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    }).then((data) => data.json())
-      .then( res => {
-        res = res.reverse();
-        console.log(res);
-       
-        const createArr = [];
-        const cpuArr = [];
-        const memArr = [];
-        const ioArr = [];
-        const userOutput = [];
+    const res = dummyData.reverse();
+    // fetch('/containers/stats', {
+    //   method: 'GET',
+    //   headers: { 'Content-Type': 'application/json' },
+    // }).then((data) => data.json())
+    //   .then( res => {
+    //  res = res.reverse();
+    console.log(res);
+    const createArr = [];
+    const cpuArr = [];
+    const memArr = [];
+    const ioArr = [];
+    const userOutput = [];
 
-        // TYPESCRIPT
-        // const createArr: strArray = [];
-        // const cpuArr: strArray = [];
-        // const memArr: strArray = [];
-        // const ioArr: strArray = [];
-        // const userOutput: strArray = [];
+    for (let i = 0; i < res.length; i++) {
+      console.log('entered loop');
+      createArr.push(res[i].created_at);
+      cpuArr.push(res[i].cpu_perc);
+      memArr.push(res[i].memory_perc);
+      ioArr.push(res[i].net_input);
+      userOutput.push(res[i].net_output);
+    }
+    // console.log(createArr);
+    // console.log(cpuArr);
+    // console.log(memArr);
+    // console.log(ioArr);
 
-        for (let i = 0; i < res.length; i++) {
-          console.log('entered loop');
-          createArr.push(res[i].created_at);
-          cpuArr.push(res[i].cpu_perc);
-          memArr.push(res[i].memory_perc);
-          ioArr.push(res[i].net_input);
-          userOutput.push(res[i].net_output);
-        }
-        console.log(createArr);
-        console.log(cpuArr);
-        console.log(memArr);
-        console.log(ioArr);
-
-        setUserCpu({
-          labels:createArr,
-          datasets:[{
-            label: 'CPU Percentage',
-            data:cpuArr,
-            fill: true,
-            backgroundColor: [
-              '#355070'
-            ],
-            borderColor: 'grey',
-            borderWidth: 2
-          },
-          ]
-        });
-        setUserMemory({
-          labels:createArr,
-          datasets:[{
-            label: 'Memory Percentage',
-            data:memArr,
-            fill: true,
-            backgroundColor: [
-              '#6d597a'
-            ],
-            borderColor: 'grey',
-            borderWidth: 2
-          }]
-        });
-        setUserIO({
-          labels:createArr,
-          datasets:[{
-            label: 'Net Input',
-            data:ioArr,
-            fill: true,
-            backgroundColor: [
-              '#e56b6f'
-            ],
-            borderColor: 'grey',
-            borderWidth: 2
-          },
-          {
-            label: 'Net output',
-            // data = y-axis
-            //pass in memArr
-            data: userOutput,
-            fill: true,
-            backgroundColor: [  
-              '#b56576'
-            ],
-            borderColor: 'grey',
-            borderWidth: 2
-          }]
-        });
+    setUserCpu({
+      labels:createArr,
+      datasets:[{
+        label: 'CPU Percentage',
+        data:cpuArr,
+        fill: true,
+        backgroundColor: [
+          '#355070'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      },
+      ]
+    });
+    setUserMemory({
+      labels:createArr,
+      datasets:[{
+        label: 'Memory Percentage',
+        data:memArr,
+        fill: true,
+        backgroundColor: [
+          '#6d597a'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      }]
+    });
+    setUserIO({
+      labels:createArr,
+      datasets:[{
+        label: 'Net Input',
+        data:ioArr,
+        fill: true,
+        backgroundColor: [
+          '#e56b6f'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      },
+      {
+        label: 'Net output',
+        // data = y-axis
+        //pass in memArr
+        data: userOutput,
+        fill: true,
+        backgroundColor: [  
+          '#b56576'
+        ],
+        borderColor: 'grey',
+        borderWidth: 2
+      }]
+    });
     
-      }
-      );
+    //}
+    //);
   }, []);
   
 
