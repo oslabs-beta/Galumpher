@@ -14,7 +14,7 @@ const dbRoutes = require('./routes/dbRoutes');
 app.use(express.json());
 
 // Always respond with the static assets
-app.use(express.static(path.resolve(__dirname, '../build')));
+app.use(express.static(path.resolve(__dirname, '../out/website')));
 
 // Basic commands - start, stop etc.
 app.use('/commands', mainCommandsRoutes);
@@ -27,7 +27,7 @@ app.use('/db', dbRoutes);
 
 // Send the react app 
 app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'));
+  return res.status(200).sendFile(path.resolve(__dirname, '../out/website/index.html'));
 });
 
 // Local errors
@@ -37,6 +37,7 @@ app.use((req, res) => {
 
 // Global errors
 // eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Error handler caught unknown middleware error',

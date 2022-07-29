@@ -1,7 +1,7 @@
 import React from 'react';
-import Dashboard from './dashboard/Dashboard.jsx';
-import Header from './Header.jsx';
-import NavBar from './navbar/NavBar.jsx';
+import Dashboard from './dashboard/Dashboard';
+import Header from './Header';
+import NavBar from './navbar/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
