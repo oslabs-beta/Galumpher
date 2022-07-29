@@ -37,6 +37,7 @@ app.use((req, res) => {
 
 // Global errors
 // eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Error handler caught unknown middleware error',
