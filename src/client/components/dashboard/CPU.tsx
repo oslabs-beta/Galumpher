@@ -1,42 +1,10 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import type { ChartData } from 'chart.js';
-interface LineProps {
-  data: ChartData<'line'>;
-}
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-); 
-type chartData = {
-  labels?: string[];
-  datasets?: [{
-    label?: string;
-    data?: string[];
-    fill?: boolean;
-    backgroundColor?: string[]
-    borderColor?: string;
-    borderWidth?: number;
-  }]
+import { Chart as ChartJS,CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend } from 'chart.js';
+ChartJS.register( CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend); 
 
-}
-
-const Cpu = ({chartData:chartData}) => {
+// eslint-disable-next-line react/prop-types
+const Cpu = ({ chartData }) => {
 
   return (
     <div className="cpu">

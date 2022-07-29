@@ -1,21 +1,11 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Chart, Line } from 'react-chartjs-2';
 import {Chart as ChartJS} from 'chart.js/auto';
+import { ChartData } from 'chart.js';
+//import 'chart.js/auto';
 
-type chartData = {
-  labels?: string[];
-  datasets?: [{
-    label?: string;
-    data?: string[];
-    fill?: boolean;
-    backgroundColor?: string[]
-    borderColor?: string;
-    borderWidth?: number;
-  }]
-
-}
-
-const InputOutput = ({chartData:chartData}) => {
+// eslint-disable-next-line react/prop-types
+const InputOutput = ({ chartData }) => {
 
   return (
     <div className='input-output'>

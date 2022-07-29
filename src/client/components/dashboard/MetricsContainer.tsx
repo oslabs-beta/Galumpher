@@ -4,63 +4,18 @@ import { useState, useEffect } from 'react';
 import Memory from './Memory';
 import Cpu from './CPU';
 import InputOutput from './InputOutput';
+import { PossibleioData, PossiblechartData } from '../../../types/globalTypes';
+// import type { ChartData, ChartOptions } from 'chart.js';
+// interface LineProps {
+//   options: ChartOptions<'line'>;
+//   data: ChartData<'line'>;
+// }
 // import Swap from './swap';
- import { res } from './data';
+//import { res } from './data';
 // import { strArray } from '../../../types/globalTypes'
 
 
 const MetricsContainer = () => {
-  interface chartData {
-    labels?: string[];
-    datasets?: [{
-      label?: string;
-      data?: string[];
-      fill?: boolean;
-      backgroundColor?: string[]
-      borderColor?: string;
-      borderWidth?: number;
-    }]
-
-  }
-  
-  interface ioData {
-      labels: string[];
-      datasets: [{
-        label: string;
-        data: string[];
-        fill: boolean;
-        backgroundColor: string[]
-        borderColor: string;
-        borderWidth: number;
-      },
-      {
-        label?: string;
-        data: string[];
-        fill: boolean;
-        backgroundColor: string[]
-        borderColor: string;
-        borderWidth: number;
-      }]
-    
-  }
-  type PossibleioData = ioData | null;
-  type PossiblechartData = chartData | null;
-
-  const templateObj = {
-  labels: ['fake'],
-  datasets: [{
-    label: 'CPU Percentage',
-    // data = y-axis
-    //passing in cpuArr
-    data:['null'],
-    fill: true,
-    backgroundColor: [
-      '#355070'
-    ],
-    borderColor: 'grey',
-    borderWidth: 2
-  }]
-  }
   useEffect(() => {
     // const res = dummyData.reverse();
     fetch('/containers/stats', {
@@ -78,11 +33,11 @@ const MetricsContainer = () => {
         // const userOutput = [];
 
         // TYPESCRIPT
-         const createArr: string[] = [];
-         const cpuArr: string[] = [];
-         const memArr: string[] = [];
-         const ioArr: string[] = [];
-         const userOutput: string[] = [];
+        const createArr: string[] = [];
+        const cpuArr: string[] = [];
+        const memArr: string[] = [];
+        const ioArr: string[] = [];
+        const userOutput: string[] = [];
 
         for (let i = 0; i < res.length; i++) {
           console.log('entered loop');
@@ -170,10 +125,7 @@ const MetricsContainer = () => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  })
-    //passing in created_at array
-     
-  ;
+  });
 
   //Memory graph and state
   const [userMemory,setUserMemory] = useState<PossiblechartData>({
@@ -190,21 +142,8 @@ const MetricsContainer = () => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  })
-    // labels: [],
-    // datasets: [{
-    //   label: 'Memory Percentage',
-    //   // data = y-axis
-    //   //pass in memArr
-    //   data: [],
-    //   fill: true,
-    //   backgroundColor: [
-    //     '#6d597a'
-    //   ],
-    //   borderColor: 'grey',
-    //   borderWidth: 2
-    // }]
-  //);
+  });
+  
   //InputOutput graph and state
   const [userIO,setUserIO] = useState<PossibleioData>({
     labels: ['Loading...'],
@@ -232,7 +171,7 @@ const MetricsContainer = () => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  })
+  });
    
   //Swap graph and state
   //   const [userSwap,setUserSwap] = useState({
@@ -274,11 +213,11 @@ const MetricsContainer = () => {
         // console.log('RES:', res);
         //loop through data and replace each object in containderData array with incoming objects
         const createdAt: string[] = [];
-         const cpuPercent: string[] = [];
-         const memory: string[] = [];
-         const userInput: string[] = [];
-         const userOutput: string[] = [];
-         //----js version----
+        const cpuPercent: string[] = [];
+        const memory: string[] = [];
+        const userInput: string[] = [];
+        const userOutput: string[] = [];
+        //----js version----
         //const createdAt = [];
         //const cpuPercent = [];
         //const memory = [];
