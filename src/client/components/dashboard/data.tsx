@@ -1,4 +1,4 @@
-export const dummyData = [
+export const res = [
   {
     'id': 9,
     'container_name': 'practical_sanderson',
