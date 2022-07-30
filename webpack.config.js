@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -7,7 +7,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'out/website'),
     filename: 'bundle.js',
+    clean: true,
   },
+  target: 'node',
   plugins: [new HtmlWebpackPlugin({
     title: 'Development',
     template: path.resolve(__dirname, './src/website/index.html'),
@@ -29,7 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.m?(jsx|js)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {

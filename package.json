@@ -2,12 +2,14 @@
   "name": "galumphing",
   "version": "1.0.0",
   "description": "Podman Electron App",
-  "main": "index.js",
+  "main": "index.tsx",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"node server/server.js\" \"electron ./src/electron/electron.ts\"",
     "dev": "NODE_ENV=development concurrently \"webpack-dev-server --hot\" \"nodemon ./server/server.js\" \"electron ./src/electron/electron.ts\"",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "stats": "webpack --profile --json=compilation-stats.json"
   },
   "repository": {
     "type": "git",
