@@ -4,7 +4,7 @@ import { Chart as ChartJS,CategoryScale,LinearScale,PointElement,LineElement,Tit
 ChartJS.register( CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend); 
 
 // eslint-disable-next-line react/prop-types
-const Cpu = ({ chartData }) => {
+const Cpu = ({ chartData }:any) => {
 
   return (
     <div className="cpu">

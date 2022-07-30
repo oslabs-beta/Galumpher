@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Memory from './Memory';
 import Cpu from './CPU';
 import InputOutput from './InputOutput';
-import { PossibleioData, PossiblechartData } from '../../../types/globalTypes';
+//import { PossibleioData, PossiblechartData } from '../../../types/globalTypes';
 // import type { ChartData, ChartOptions } from 'chart.js';
 // interface LineProps {
 //   options: ChartOptions<'line'>;
@@ -111,7 +111,7 @@ const MetricsContainer = () => {
   
 
   // initial states
-  const [userCpu,setUserCpu] = useState<PossiblechartData>({
+  const [userCpu,setUserCpu] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
@@ -128,7 +128,7 @@ const MetricsContainer = () => {
   });
 
   //Memory graph and state
-  const [userMemory,setUserMemory] = useState<PossiblechartData>({
+  const [userMemory,setUserMemory] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
@@ -145,7 +145,7 @@ const MetricsContainer = () => {
   });
   
   //InputOutput graph and state
-  const [userIO,setUserIO] = useState<PossibleioData>({
+  const [userIO,setUserIO] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
