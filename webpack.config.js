@@ -9,7 +9,6 @@ module.exports = {
     filename: 'bundle.js',
     clean: true,
   },
-  target: 'node',
   plugins: [new HtmlWebpackPlugin({
     title: 'Development',
     template: path.resolve(__dirname, './src/website/index.html'),
