@@ -5,11 +5,12 @@ import Memory from './Memory';
 import Cpu from './CPU';
 import InputOutput from './InputOutput';
 // import Swap from './swap';
- import { res } from './data';
+import { res } from './data';
 // import { strArray } from '../../../types/globalTypes'
 
 
-const MetricsContainer = () => {
+const MetricsContainer = ({ defaultContainer }) => {
+  console.log('INSIDE:', defaultContainer);
   interface chartData {
     labels?: string[];
     datasets?: [{
@@ -47,29 +48,31 @@ const MetricsContainer = () => {
   type PossiblechartData = chartData | null;
 
   const templateObj = {
-  labels: ['fake'],
-  datasets: [{
-    label: 'CPU Percentage',
-    // data = y-axis
-    //passing in cpuArr
-    data:['null'],
-    fill: true,
-    backgroundColor: [
-      '#355070'
-    ],
-    borderColor: 'grey',
-    borderWidth: 2
-  }]
-  }
+    labels: ['fake'],
+    datasets: [{
+      label: 'CPU Percentage',
+      // data = y-axis
+      //passing in cpuArr
+      data:['null'],
+      fill: true,
+      backgroundColor: [
+        '#355070'
+      ],
+      borderColor: 'grey',
+      borderWidth: 2
+    }]
+  };
   useEffect(() => {
+    console.log('running useEffect');
     // const res = dummyData.reverse();
-    fetch('/containers/stats', {
+    fetch(`/containers/stats/${defaultContainer}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     }).then((data) => data.json())
       .then( res => {
         res = res.reverse();
         console.log(res);
+        console.log('jaree');
        
         // const createArr = [];
         // const cpuArr = [];
@@ -78,14 +81,14 @@ const MetricsContainer = () => {
         // const userOutput = [];
 
         // TYPESCRIPT
-         const createArr: string[] = [];
-         const cpuArr: string[] = [];
-         const memArr: string[] = [];
-         const ioArr: string[] = [];
-         const userOutput: string[] = [];
+        const createArr: string[] = [];
+        const cpuArr: string[] = [];
+        const memArr: string[] = [];
+        const ioArr: string[] = [];
+        const userOutput: string[] = [];
 
         for (let i = 0; i < res.length; i++) {
-          console.log('entered loop');
+          // console.log('entered loop');
           createArr.push(res[i].created_at);
           cpuArr.push(res[i].cpu_perc);
           memArr.push(res[i].memory_perc);
@@ -149,10 +152,9 @@ const MetricsContainer = () => {
             borderWidth: 2
           }]
         });
-    
       }
       );
-  }, []);
+  }, [defaultContainer]);
   
 
   // initial states
@@ -171,7 +173,7 @@ const MetricsContainer = () => {
       borderWidth: 2
     }]
   })
-    //passing in created_at array
+  //passing in created_at array
      
   ;
 
@@ -190,20 +192,20 @@ const MetricsContainer = () => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  })
-    // labels: [],
-    // datasets: [{
-    //   label: 'Memory Percentage',
-    //   // data = y-axis
-    //   //pass in memArr
-    //   data: [],
-    //   fill: true,
-    //   backgroundColor: [
-    //     '#6d597a'
-    //   ],
-    //   borderColor: 'grey',
-    //   borderWidth: 2
-    // }]
+  });
+  // labels: [],
+  // datasets: [{
+  //   label: 'Memory Percentage',
+  //   // data = y-axis
+  //   //pass in memArr
+  //   data: [],
+  //   fill: true,
+  //   backgroundColor: [
+  //     '#6d597a'
+  //   ],
+  //   borderColor: 'grey',
+  //   borderWidth: 2
+  // }]
   //);
   //InputOutput graph and state
   const [userIO,setUserIO] = useState<PossibleioData>({
@@ -232,7 +234,7 @@ const MetricsContainer = () => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  })
+  });
    
   //Swap graph and state
   //   const [userSwap,setUserSwap] = useState({
@@ -274,11 +276,11 @@ const MetricsContainer = () => {
         // console.log('RES:', res);
         //loop through data and replace each object in containderData array with incoming objects
         const createdAt: string[] = [];
-         const cpuPercent: string[] = [];
-         const memory: string[] = [];
-         const userInput: string[] = [];
-         const userOutput: string[] = [];
-         //----js version----
+        const cpuPercent: string[] = [];
+        const memory: string[] = [];
+        const userInput: string[] = [];
+        const userOutput: string[] = [];
+        //----js version----
         //const createdAt = [];
         //const cpuPercent = [];
         //const memory = [];
@@ -365,6 +367,7 @@ const MetricsContainer = () => {
       < Cpu chartData={userCpu}/>
       < Memory chartData={userMemory}/>
       < InputOutput chartData={userIO}/>
+      <div>{defaultContainer}</div>
     </div>
   );
 };
