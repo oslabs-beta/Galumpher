@@ -17,13 +17,13 @@ const NavBar = ({ navbarData, changeDisplay }) => {
       <img className='icon' src={GalumphingIcon} alt="Galumphing icon" />
       <div className='navbarItems'>
         <div className='containerDrop navbarItems' onClick={handleDropClick}>
-          Containers
+          <p>Containers</p><p className='arrow'>{isClicked ? '⌄' : '^'}</p>
         </div>
-        {isClicked ? navbarData.map((item, index) => {
+        {isClicked && navbarData.length  ? navbarData.map((item, index) => {
           return <div className='subItems' onClick={() => {
             changeDisplay(navbarData[index].name);
           }} key={index}>{item.name}</div>;
-        }) : null}
+        }) : isClicked ? <div className='noContainers'>No containers running</div> : null}
         <Link to='/' className='containerDrop'>Settings</Link>
       </div>
     </div>

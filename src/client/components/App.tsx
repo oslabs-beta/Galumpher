@@ -15,7 +15,6 @@ const App = () => {
   useEffect(() => {
     fetch('/containers').then((res) => res.json()).then((containers) => {
       setNavList(containers);
-      console.log(containers);
       setDefaultContainer(containers[0].name);
     });
   }, []);
