@@ -27,8 +27,14 @@ module.exports = {
   },
 
   getStats: (req, res, next) => {
-    console.log('here');
-    exec('podman stats --no-stream --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
+
+    // console.log(req.params);
+
+    const { container_name } = req.params;
+    
+    console.log('container name from containerController: ', container_name);
+
+    exec(`podman stats ${container_name} --no-stream --format "{{json .}}"`, { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
@@ -36,8 +42,10 @@ module.exports = {
         next(createError(stderr, 'containerController.getStats'));
       } 
       else {
-        console.log('executed contaienerController.getStats');
+        console.log('executed containerController.getStats');
         const metrics = parseStats(JSON.parse(stdout));
+        
+        console.log("metrics from getStats middleware", metrics);
         res.locals.metrics = metrics;
         next();
       }
