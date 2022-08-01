@@ -10,7 +10,7 @@ const { parseStats } = require('../helperFuncs/helpers');
 module.exports = {
 
   getContainers: (req, res, next) => {
-    exec('podman ps -a --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
+    exec('podman ps --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
