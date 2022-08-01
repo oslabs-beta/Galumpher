@@ -21,7 +21,6 @@ const MetricsContainer = ({ defaultContainer }) => {
       borderColor?: string;
       borderWidth?: number;
     }]
-
   }
   
   interface ioData {
