@@ -20,7 +20,9 @@ module.exports = {
       else {
         console.log('executed containerController.getContainers');
         const result = JSON.parse(stdout);
-        res.locals.containers = result[0];
+        res.locals.containers = result.map((container) => {
+          return { name: container.Names[0] };
+        });
         next();
       }
     });
@@ -45,7 +47,7 @@ module.exports = {
         console.log('executed containerController.getStats');
         const metrics = parseStats(JSON.parse(stdout));
         
-        console.log("metrics from getStats middleware", metrics);
+        console.log('metrics from getStats middleware', metrics);
         res.locals.metrics = metrics;
         next();
       }

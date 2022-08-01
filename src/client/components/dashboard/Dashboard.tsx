@@ -1,7 +1,7 @@
 import React from 'react';
 import MetricsContainer from './MetricsContainer';
 
-const Dashboard = ({defaultContainer}) => {
+const Dashboard = ({ defaultContainer }) => {
   return (
     <div className='dashboard'>
       {/* <h3>Dashboard</h3> */}
