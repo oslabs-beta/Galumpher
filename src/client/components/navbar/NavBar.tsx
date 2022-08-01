@@ -1,12 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
+import * as RiIcons from 'react-icons/ri';
 
 import GalumphingIcon from '../../images/galumphing-icon.png';
-import { NavbarData } from './NavbarData.js';
+// import { fakeData } from './NavbarData.js';
 import SubMenu from './SubMenu';
+
+const NavbarData = [
+  {
+    title: 'Containers',
+    path: '/containers',
+    arrowClosed: <RiIcons.RiArrowUpSFill/>,
+    arrowOpened: <RiIcons.RiArrowDownSFill />,
+    
+    subNav: [
+      {
+        title: 'Container 10',
+        path: '/containers/container1',
+      },
+      {
+        title: 'Container 2',
+        path: '/containers/container2',
+      },
+      {
+        title: 'Container 3',
+        path: '/containers/container3',
+      }
+    ]
+  },
+  {
+    title: 'Settings',
+    path: '/settings'
+  }
+];
+
 
 const NavbarItems = styled.nav`
   background: #15171c;
