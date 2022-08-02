@@ -5,7 +5,7 @@ const localHost = process.env.NODE_ENV === 'development' ? 'http://localhost:808
 
 app.on('ready', () => {
   // once electron has started up, create a window.
-  const window = new BrowserWindow({ width: 800, height: 600 });
+  const window = new BrowserWindow({ width: 1000, height: 800 });
 
   // hide the default menu bar that comes with the browser window
   window.setMenuBarVisibility(false);
