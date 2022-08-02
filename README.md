@@ -75,12 +75,8 @@ npm run dev
 
 - [Electron](https://www.electronjs.org/)
 - [React](https://reactjs.org/)
-- [React Router](https://reactrouter.com/)
-- [Redux](https://redux.js.org/)
-- [Node](https://nodejs.org/)
-- [Kubernetes-client](https://github.com/kubernetes-client/)
-- [Prometheus](https://prometheus.io/)
-- [Material UI](https://mui.com/)
+- [Express](http://expressjs.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [Chart.js](https://www.chartjs.org/)
 
 ## The Team
