@@ -29,7 +29,23 @@ that container and load them into the metrics display section.
 ```
 git clone https://github.com/oslabs-beta/Galumphing.git
 ```
-### 3. Run the following commands 
+
+### 3. Create a .env file in the projects root level directory
+
+- Create a `.env` file in the project's root-level directory.
+```
+root
+  ├─ .env
+  ├─ server
+  └─ src
+``` 
+- In the `.env` file add the following environment variable and add your Postrges URI. This is required.
+
+```js
+// .env
+POSTGRES_URI=''
+```
+### 4. Run the following commands 
 
 
 ```
@@ -59,12 +75,8 @@ npm run dev
 
 - [Electron](https://www.electronjs.org/)
 - [React](https://reactjs.org/)
-- [React Router](https://reactrouter.com/)
-- [Redux](https://redux.js.org/)
-- [Node](https://nodejs.org/)
-- [Kubernetes-client](https://github.com/kubernetes-client/)
-- [Prometheus](https://prometheus.io/)
-- [Material UI](https://mui.com/)
+- [Express](http://expressjs.com/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [Chart.js](https://www.chartjs.org/)
 
 ## The Team
