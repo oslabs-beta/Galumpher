@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler
 } from 'chart.js'
 import type { ChartData } from 'chart.js';
 interface LineProps {
@@ -21,7 +22,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 ); 
 type chartData = {
   labels?: string[];
