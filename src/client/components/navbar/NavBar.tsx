@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import * as RiIcons from 'react-icons/ri';
 
-import GalumphingIcon from '../../images/galumphing-icon.png';
+import GalumphingIcon from '../../assets/galumphing-icon.png';
 
 const NavBar = ({ navbarData, changeDisplay }) => {
   const [isClicked, setIsClicked] = useState(false);
