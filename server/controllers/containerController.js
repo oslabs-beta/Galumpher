@@ -10,7 +10,7 @@ const { parseStats } = require('../helperFuncs/helpers');
 module.exports = {
 
   getContainers: (req, res, next) => {
-    exec('podman ps -a --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
+    exec('podman ps --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
@@ -20,15 +20,23 @@ module.exports = {
       else {
         console.log('executed containerController.getContainers');
         const result = JSON.parse(stdout);
-        res.locals.containers = result[0];
+        res.locals.containers = result.map((container) => {
+          return { name: container.Names[0] };
+        });
         next();
       }
     });
   },
 
   getStats: (req, res, next) => {
-    console.log('here');
-    exec('podman stats --no-stream --format "{{json .}}"', { windowsHide: true }, (error, stdout, stderr) => {
+
+    // console.log(req.params);
+
+    const { container_name } = req.params;
+    
+    console.log('container name from containerController: ', container_name);
+
+    exec(`podman stats ${container_name} --no-stream --format "{{json .}}"`, { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         // console.log(error);
       }
@@ -36,8 +44,10 @@ module.exports = {
         next(createError(stderr, 'containerController.getStats'));
       } 
       else {
-        console.log('executed contaienerController.getStats');
+        console.log('executed containerController.getStats');
         const metrics = parseStats(JSON.parse(stdout));
+        
+        console.log('metrics from getStats middleware', metrics);
         res.locals.metrics = metrics;
         next();
       }

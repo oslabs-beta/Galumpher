@@ -1,4 +1,4 @@
-const db = require('../../database/model.js');
+const db = require('../database/model');
 
 const dbController = {};
 
@@ -28,7 +28,12 @@ dbController.insertData = (req, res, next) => {
 
 
 dbController.getData = (req, res, next) => {
-  const lastTen = 'SELECT * FROM metrics ORDER BY id DESC LIMIT 10;';
+  console.log('req params: ', req.params);
+  const { container_name } = req.params;
+  console.log('container name from dbController: ', container_name);
+
+  // only select from the metrics where the container name matches the container name from the url (req.params)
+  const lastTen = `SELECT * FROM metrics WHERE container_name = '${container_name}' ORDER BY id DESC LIMIT 10;`;
   db.query(lastTen)
     .then((data) => {
       //iterate through the tows in the returned data
@@ -42,6 +47,7 @@ dbController.getData = (req, res, next) => {
         row.created_at = edited_created_date;
       });
       res.locals.data = data.rows;
+      // console.log(res.locals.data);
       return next();
     })
     .catch((err) => {
