@@ -10,7 +10,7 @@ const Memory = ( { chartData }:any ) => {
   return (
     <div className='memory'>
       <h5>Memory Usage Percentage</h5>
-      < Line data={chartData}/>
+      <Line data={chartData}/>
     </div>
   );
 };

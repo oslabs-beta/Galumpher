@@ -1,29 +1,23 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+// COMPONENTS
 import Memory from './Memory';
 import Cpu from './CPU';
 import InputOutput from './InputOutput';
+// TS TYPES
+// import { strArray } from '../../../types/globalTypes'
 
 
-
-const MetricsContainer = () => {
+const MetricsContainer = ({ defaultContainer }) => {
+  
   useEffect(() => {
-    // const res = dummyData.reverse();
-    fetch('/containers/stats', {
+    fetch(`/containers/stats/${defaultContainer}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     }).then((data) => data.json())
       .then( res => {
         res = res.reverse();
-        console.log(res);
-       
-        // const createArr = [];
-        // const cpuArr = [];
-        // const memArr = [];
-        // const ioArr = [];
-        // const userOutput = [];
-
         // TYPESCRIPT
         const createArr: string[] = [];
         const cpuArr: string[] = [];
@@ -32,18 +26,12 @@ const MetricsContainer = () => {
         const userOutput: string[] = [];
 
         for (let i = 0; i < res.length; i++) {
-          console.log('entered loop');
           createArr.push(res[i].created_at);
           cpuArr.push(res[i].cpu_perc);
           memArr.push(res[i].memory_perc);
           ioArr.push(res[i].net_input);
           userOutput.push(res[i].net_output);
         }
-        // console.log(createArr);
-        // console.log(cpuArr);
-        // console.log(memArr);
-        // console.log(ioArr);
-
         setUserCpu({
           labels:createArr,
           datasets:[{
@@ -85,8 +73,6 @@ const MetricsContainer = () => {
           },
           {
             label: 'Net output',
-            // data = y-axis
-            //pass in memArr
             data: userOutput,
             fill: true,
             backgroundColor: [  
@@ -96,10 +82,9 @@ const MetricsContainer = () => {
             borderWidth: 2
           }]
         });
-    
       }
       );
-  }, []);
+  }, [defaultContainer]);
   
 
   // initial states
@@ -107,8 +92,6 @@ const MetricsContainer = () => {
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
-      // data = y-axis
-      //passing in cpuArr
       data:['null'],
       fill: true,
       backgroundColor: [
@@ -117,15 +100,13 @@ const MetricsContainer = () => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  });
-
+  })
+  ;
   //Memory graph and state
   const [userMemory,setUserMemory] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
-      // data = y-axis
-      //passing in cpuArr
       data:['null'],
       fill: true,
       backgroundColor: [
@@ -135,14 +116,11 @@ const MetricsContainer = () => {
       borderWidth: 2
     }]
   });
-  
   //InputOutput graph and state
   const [userIO,setUserIO] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
-      // data = y-axis
-      //passing in cpuArr
       data:['null'],
       fill: true,
       backgroundColor: [
@@ -153,8 +131,6 @@ const MetricsContainer = () => {
     },
     {
       label: 'Loading...',
-      // data = y-axis
-      //passing in cpuArr
       data:['null'],
       fill: true,
       backgroundColor: [
@@ -164,37 +140,10 @@ const MetricsContainer = () => {
       borderWidth: 2
     }]
   });
-   
-  //Swap graph and state
-  //   const [userSwap,setUserSwap] = useState({
-  //     labels: [],
-  //     datasets: [{
-  //       label: 'Container Swap',
-  //       // data = y-axis
-  //       data: [],
-  //       // backgroundColor = color of each individual bar/dot/slice
-    
-  //       backgroundColor: [  
-  //         '#f0ecf6',
-  //         '#e1d9ec',
-  //         '#d3c5e3',
-  //         '#c4b2d9',
-  //         '#b59fd0',
-  //         '#a68cc6',
-  //         '#9779bd',
-  //         '#8965b3',
-  //         '#7a52aa',
-  //         '#6b3fa0'
-  //       ],
-  //       borderColor: 'grey',
-  //       borderWidth: 2
-  //     }]
-  //   });
-
 
   // fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
-    fetch('containers/stats', {
+    fetch(`containers/stats/${defaultContainer}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -202,19 +151,12 @@ const MetricsContainer = () => {
       .then(data => data.json())
       .then(res => {
         res = res.reverse();
-        // console.log('RES:', res);
         //loop through data and replace each object in containderData array with incoming objects
         const createdAt: string[] = [];
         const cpuPercent: string[] = [];
         const memory: string[] = [];
         const userInput: string[] = [];
         const userOutput: string[] = [];
-        //----js version----
-        //const createdAt = [];
-        //const cpuPercent = [];
-        //const memory = [];
-        // const userInput = [];
-        // const userOutput = [];
 
         for (let i = 0; i < res.length; i++) {
           createdAt.push(res[i].created_at);
@@ -228,8 +170,6 @@ const MetricsContainer = () => {
           labels: createdAt,
           datasets: [{
             label: 'CPU Percentage',
-            // data = y-axis
-            //pass in memArr
             data: cpuPercent,
             fill: true,
             backgroundColor: [
@@ -243,9 +183,7 @@ const MetricsContainer = () => {
         setUserMemory({
           labels: createdAt,
           datasets: [{
-            label: 'Memory Percentage',
-            // data = y-axis
-            //pass in memArr
+            label:'Memory Percentage',
             data: memory,
             fill: true,
             backgroundColor: [
@@ -259,8 +197,6 @@ const MetricsContainer = () => {
           labels: createdAt,
           datasets: [{
             label: 'Net input',
-            // data = y-axis
-            //pass in memArr
             data: userInput,
             fill: true,
             backgroundColor: [
@@ -271,8 +207,6 @@ const MetricsContainer = () => {
           },
           {
             label: 'Net output',
-            // data = y-axis
-            //pass in memArr
             data: userOutput,
             fill: true,
             backgroundColor: [  
@@ -291,7 +225,6 @@ const MetricsContainer = () => {
   
   return (
     <div className="metrics-container">
-      {/* <h2>This is the Metrics Container</h2> */}
       <button className="update-metrics" onClick={updateMetrics}>Update Metrics</button>
       < Cpu chartData={userCpu}/>
       < Memory chartData={userMemory}/>

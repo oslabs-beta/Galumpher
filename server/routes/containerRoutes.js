@@ -4,7 +4,8 @@ const router = express.Router();
 const containerController = require('../controllers/containerController');
 const dbController = require('../controllers/dbController');
 
-router.get('/stats' , containerController.getStats, dbController.insertData, dbController.getData, (req, res) => {
+
+router.get('/stats/:container_name', containerController.getStats, dbController.insertData, dbController.getData, (req, res) => {
   return res.status(200).json(res.locals.data);
 });
 
