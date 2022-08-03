@@ -4,15 +4,7 @@ import { useState, useEffect } from 'react';
 import Memory from './Memory';
 import Cpu from './CPU';
 import InputOutput from './InputOutput';
-//import { PossibleioData, PossiblechartData } from '../../../types/globalTypes';
-// import type { ChartData, ChartOptions } from 'chart.js';
-// interface LineProps {
-//   options: ChartOptions<'line'>;
-//   data: ChartData<'line'>;
-// }
-// import Swap from './swap';
-//import { res } from './data';
-// import { strArray } from '../../../types/globalTypes'
+
 
 
 const MetricsContainer = () => {
