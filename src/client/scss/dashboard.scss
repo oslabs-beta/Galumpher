@@ -14,10 +14,6 @@ body {
     background-color: black;
 }
 
-// #root {
-
-// }
-
 .app {
     // border: 2px solid red;
     // height: 100%;
@@ -26,8 +22,8 @@ body {
 
 .header {
     display: flex;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 30px;
+    padding-bottom: 25px;
     padding-left: 50px;
     // position: relative;
     // flex-direction: column;
@@ -50,7 +46,7 @@ body {
     top: 0;
     left: 0;
     // background-color: pink;
-    background-color: #303033;
+    background-color: #15171c;
     overflow-x: hidden;
     text-align: center;
     display: flex;
@@ -85,7 +81,14 @@ body {
     height: 70px;
     text-decoration: none;
     padding-left: 20px;
+
+    &:hover {
+        background: #252831;
+        border-left: 4px solid #7500bc;
+        cursor: pointer;
+    }
 }
+
 
 .noContainers {
     font-size: 12px;
