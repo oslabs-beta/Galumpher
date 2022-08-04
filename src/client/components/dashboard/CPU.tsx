@@ -12,9 +12,6 @@ import {
   Filler
 } from 'chart.js'
 import type { ChartData } from 'chart.js';
-interface LineProps {
-  data: ChartData<'line'>;
-}
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,20 +22,9 @@ ChartJS.register(
   Legend,
   Filler
 ); 
-type chartData = {
-  labels?: string[];
-  datasets?: [{
-    label?: string;
-    data?: string[];
-    fill?: boolean;
-    backgroundColor?: string[]
-    borderColor?: string;
-    borderWidth?: number;
-  }]
 
-}
 
-const Cpu = ({chartData:chartData}) => {
+const Cpu = ({ chartData }:any) => {
 
   return (
     <div className="cpu">

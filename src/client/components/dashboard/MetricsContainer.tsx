@@ -8,56 +8,9 @@ import InputOutput from './InputOutput';
 // TS TYPES
 // import { strArray } from '../../../types/globalTypes'
 
-
+// eslint-disable-next-line react/prop-types
 const MetricsContainer = ({ defaultContainer }) => {
-  interface chartData {
-    labels?: string[];
-    datasets?: [{
-      label?: string;
-      data?: string[];
-      fill?: boolean;
-      backgroundColor?: string[]
-      borderColor?: string;
-      borderWidth?: number;
-    }]
-  }
   
-  interface ioData {
-      labels: string[];
-      datasets: [{
-        label: string;
-        data: string[];
-        fill: boolean;
-        backgroundColor: string[]
-        borderColor: string;
-        borderWidth: number;
-      },
-      {
-        label?: string;
-        data: string[];
-        fill: boolean;
-        backgroundColor: string[]
-        borderColor: string;
-        borderWidth: number;
-      }]
-    
-  }
-  type PossibleioData = ioData | null;
-  type PossiblechartData = chartData | null;
-
-  const templateObj = {
-    labels: ['fake'],
-    datasets: [{
-      label: 'CPU Percentage',
-      data:['null'],
-      fill: true,
-      backgroundColor: [
-        '#355070'
-      ],
-      borderColor: 'grey',
-      borderWidth: 2
-    }]
-  };
   useEffect(() => {
     fetch(`/containers/stats/${defaultContainer}`, {
       method: 'GET',
@@ -135,7 +88,7 @@ const MetricsContainer = ({ defaultContainer }) => {
   
 
   // initial states
-  const [userCpu,setUserCpu] = useState<PossiblechartData>({
+  const [userCpu,setUserCpu] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
@@ -150,7 +103,7 @@ const MetricsContainer = ({ defaultContainer }) => {
   })
   ;
   //Memory graph and state
-  const [userMemory,setUserMemory] = useState<PossiblechartData>({
+  const [userMemory,setUserMemory] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
@@ -164,7 +117,7 @@ const MetricsContainer = ({ defaultContainer }) => {
     }]
   });
   //InputOutput graph and state
-  const [userIO,setUserIO] = useState<PossibleioData>({
+  const [userIO,setUserIO] = useState({
     labels: ['Loading...'],
     datasets: [{
       label: 'Loading...',
@@ -230,6 +183,7 @@ const MetricsContainer = ({ defaultContainer }) => {
         setUserMemory({
           labels: createdAt,
           datasets: [{
+            label:'Memory Percentage',
             data: memory,
             fill: true,
             backgroundColor: [
