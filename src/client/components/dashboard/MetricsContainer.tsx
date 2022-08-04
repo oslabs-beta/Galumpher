@@ -8,7 +8,7 @@ import InputOutput from './InputOutput';
 // TS TYPES
 // import { strArray } from '../../../types/globalTypes'
 
-// eslint-disable-next-line react/prop-types
+
 const MetricsContainer = ({ defaultContainer }) => {
   interface chartData {
     labels?: string[];
