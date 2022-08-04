@@ -1,3 +1,7 @@
+//#424242
+//#212121
+//#303033
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -27,7 +31,7 @@ body {
     padding-left: 50px;
     // position: relative;
     // flex-direction: column;
-    background-color: rgb(55, 55, 55);
+    background-color: #424242;
 }
 
 .app-body {
@@ -46,7 +50,7 @@ body {
     top: 0;
     left: 0;
     // background-color: pink;
-    background-color: rgb(30, 30, 30);
+    background-color: #303033;
     overflow-x: hidden;
     text-align: center;
     display: flex;
