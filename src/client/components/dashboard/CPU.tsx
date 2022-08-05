@@ -10,9 +10,9 @@ import {
   Tooltip,
   Legend,
   Filler
-} from 'chart.js'
+} from 'chart.js';
 import type { ChartData } from 'chart.js';
-ChartJS.register(
+ChartJS.register (
   CategoryScale,
   LinearScale,
   PointElement,

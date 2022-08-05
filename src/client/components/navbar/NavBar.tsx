@@ -7,7 +7,6 @@ import GalumphingIcon from '../../assets/galumphing-icon.png';
 
 const NavBar = ({ navbarData, changeDisplay }) => {
 
-
   const [isClicked, setIsClicked] = useState(false);
 
   const handleDropClick = () => {

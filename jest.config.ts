@@ -7,14 +7,3 @@ const config = {
 };
 
 module.exports = config;
-
-//   verbose: true,
-// };
-// export default config;
-
-// Or async function
-// export default async (): Promise<Config.InitialOptions> => {
-//   return {
-//     verbose: true,
-//   };
-// };

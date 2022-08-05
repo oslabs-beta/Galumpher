@@ -1,3 +1,4 @@
+// dummy data for testing purposes only
 export const dummyData = [
   {
     'id': 9,

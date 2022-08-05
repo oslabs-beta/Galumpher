@@ -5,12 +5,10 @@ import { useState, useEffect } from 'react';
 import Memory from './Memory';
 import Cpu from './CPU';
 import InputOutput from './InputOutput';
-// TS TYPES
-// import { strArray } from '../../../types/globalTypes'
 
-// eslint-disable-next-line react/prop-types
 const MetricsContainer = ({ defaultContainer }) => {
   
+  // fetch data for graphs on load
   useEffect(() => {
     fetch(`/containers/stats/${defaultContainer}`, {
       method: 'GET',
@@ -18,7 +16,7 @@ const MetricsContainer = ({ defaultContainer }) => {
     }).then((data) => data.json())
       .then( res => {
         res = res.reverse();
-        // TYPESCRIPT
+       
         const createArr: string[] = [];
         const cpuArr: string[] = [];
         const memArr: string[] = [];
@@ -32,6 +30,7 @@ const MetricsContainer = ({ defaultContainer }) => {
           ioArr.push(res[i].net_input);
           userOutput.push(res[i].net_output);
         }
+
         setUserCpu({
           labels:createArr,
           datasets:[{
@@ -46,6 +45,7 @@ const MetricsContainer = ({ defaultContainer }) => {
           },
           ]
         });
+
         setUserMemory({
           labels:createArr,
           datasets:[{
@@ -59,6 +59,7 @@ const MetricsContainer = ({ defaultContainer }) => {
             borderWidth: 2
           }]
         });
+
         setUserIO({
           labels:createArr,
           datasets:[{
@@ -85,7 +86,6 @@ const MetricsContainer = ({ defaultContainer }) => {
       }
       );
   }, [defaultContainer]);
-  
 
   // initial states
   const [userCpu,setUserCpu] = useState({
@@ -100,8 +100,8 @@ const MetricsContainer = ({ defaultContainer }) => {
       borderColor: 'grey',
       borderWidth: 2
     }]
-  })
-  ;
+  });
+
   //Memory graph and state
   const [userMemory,setUserMemory] = useState({
     labels: ['Loading...'],
@@ -116,6 +116,7 @@ const MetricsContainer = ({ defaultContainer }) => {
       borderWidth: 2
     }]
   });
+
   //InputOutput graph and state
   const [userIO,setUserIO] = useState({
     labels: ['Loading...'],
@@ -141,7 +142,7 @@ const MetricsContainer = ({ defaultContainer }) => {
     }]
   });
 
-  // fetch data when Update Metrics button is clicked
+  // function to fetch data when Update Metrics button is clicked
   const updateMetrics = () => {
     fetch(`containers/stats/${defaultContainer}`, {
       method: 'GET',
@@ -151,7 +152,6 @@ const MetricsContainer = ({ defaultContainer }) => {
       .then(data => data.json())
       .then(res => {
         res = res.reverse();
-        //loop through data and replace each object in containderData array with incoming objects
         const createdAt: string[] = [];
         const cpuPercent: string[] = [];
         const memory: string[] = [];
@@ -193,6 +193,7 @@ const MetricsContainer = ({ defaultContainer }) => {
             borderWidth: 2
           }]
         });
+
         setUserIO({
           labels: createdAt,
           datasets: [{

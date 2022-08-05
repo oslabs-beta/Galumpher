@@ -1,3 +1,4 @@
+// function to convert all data points to MB
 const convertToMb = (stringBytes) => {
   if (stringBytes.slice(-2) === 'kB') return parseFloat((stringBytes.slice(0, -2) / 1024).toFixed(4));
   if (stringBytes.slice(-2) === 'MB') return parseFloat(stringBytes.slice(0, -2));
@@ -10,6 +11,7 @@ const trimAndSplit = (metrics, indx) => {
 };
 
 module.exports = {
+  // function to parse incoming data for numeric values and displaying them consistently
   parseStats: (containerStats) => {
     const parsedStats = {};
     for (let i = 0; i < containerStats.length; i ++) {
