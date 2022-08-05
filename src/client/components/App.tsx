@@ -3,8 +3,6 @@ import Dashboard from './dashboard/Dashboard';
 import Header from './Header';
 import NavBar from './navbar/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-// TS TYPES
 import { containerInfo } from '../../types/globalTypes';
 
 const App = () => {
@@ -12,6 +10,7 @@ const App = () => {
   const [navList, setNavList] = useState<containerInfo[]>([]);
   const [defaultContainer, setDefaultContainer] = useState<string>('');
 
+  // load default containers to navbar
   useEffect(() => {
     fetch('/containers').then((res) => res.json()).then((containers) => {
       setNavList(containers);

@@ -5,10 +5,11 @@ const { createError } = require('../errorObjs/serverExecErrs');
 
 
 module.exports = {
+  // to start Podman
   start: (req, res, next) => {
     exec('podman machine start', { windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
-        // console.log(error);
+        console.log(error);
       }
       if (stderr) {
         return  next(createError(stderr, 'mainCommandController.start'));
@@ -20,12 +21,12 @@ module.exports = {
       }
     });
   },
-
+  // to stop Podman
   stop: (req, res, next) => {
     exec('podman machine stop', { windowsHide: true }, (error, stdout, stderr) => {
-      // if (error) {
-      //   console.log(error);
-      // } 
+      if (error) {
+        console.log(error);
+      } 
       if (stderr) {
         return next(createError(stderr, 'mainCommandController.stop'));
       } 

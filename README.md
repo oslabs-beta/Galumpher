@@ -30,7 +30,7 @@ that container and load them into the metrics display section.
 git clone https://github.com/oslabs-beta/Galumphing.git
 ```
 
-### 3. Create a .env file in the projects root level directory
+### 3. Create a .env file in the project's root level directory
 
 - Create a `.env` file in the project's root-level directory.
 ```
@@ -39,14 +39,13 @@ root
   ├─ server
   └─ src
 ``` 
-- In the `.env` file add the following environment variable and add your Postrges URI. This is required.
+- In the `.env` file, add the following environment variable and add your Postrges URI. This is required.
 
 ```js
-// .env
+
 POSTGRES_URI=''
 ```
 ### 4. Run the following commands 
-
 
 ```
 npm install
@@ -57,7 +56,7 @@ npm start
 
 - Fork this repo.
 - Pull your fork down to your machine
-- Create your own branch based of off dev branch with the following command
+- Create your own branch based off of dev branch with the following command
 
 ```
 git checkout -b <yourBranchName> 
